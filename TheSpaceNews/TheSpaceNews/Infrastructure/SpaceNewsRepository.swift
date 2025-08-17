@@ -10,12 +10,15 @@ import Foundation
 enum ServiceApiClient {
     case live
     case mock
+    case invalidUrlMock
+    case decodingErrorMock
 }
 enum DataError: Error {
     case invalidURL
     case networkError(Error)
     case decodingError
 }
+
 protocol NewsArticlesRepository {
     func fetchArticles() async throws -> [Article]
     func fetchNextArticles() async throws -> [Article]
@@ -23,6 +26,7 @@ protocol NewsArticlesRepository {
 protocol NewsDetailsRepository {
     func fetchArticleDetails() async throws -> ArticleDetails
 }
+
 class SpaceNewsRepositoryDefault: NewsArticlesRepository {
     private let apiClient: ServiceApiClient
     private var nextURL: NextURL
@@ -38,22 +42,28 @@ class SpaceNewsRepositoryDefault: NewsArticlesRepository {
             return NewsEndpoint().asURL
         case .mock:
             return NewsMockEndpoint().asURL
+        case .invalidUrlMock:
+            return nil
+        case .decodingErrorMock:
+            return NewsMockEndpoint(path: "newsDecodingError.json").asURL
         }
     }
     private func fetchData<T: Decodable>(from url: URL) async throws -> T {
         let urlRequest = URLRequest(url: url)
+        var data: Data
         do {
-            let (data, _) = try await URLSession.shared.data(for: urlRequest)
-            let decoder = JSONDecoder()
-            do {
-                let responseData = try decoder.decode(T.self, from: data)
-                return responseData
-            } catch {
-                throw DataError.decodingError
-            }
+            (data, _) = try await URLSession.shared.data(for: urlRequest)
         } catch {
             throw DataError.networkError(error)
         }
+        let decoder = JSONDecoder()
+        do {
+            let responseData = try decoder.decode(T.self, from: data)
+            return responseData
+        } catch {
+            throw DataError.decodingError
+        }
+
     }
     func fetchArticles() async throws -> [Article] {
         guard let url = getURL() else {
@@ -70,11 +80,13 @@ class SpaceNewsRepositoryDefault: NewsArticlesRepository {
     }
     
     func fetchNextArticles() async throws -> [Article] {
-        guard let nextURL = nextURL.getNextURL() else {
+        guard let next = nextURL.getNextURL() else {
             return []
         }
         do {
-            return try await fetchData(from: nextURL)
+            let upcoming: Upcoming =  try await fetchData(from: next)
+            nextURL.updateNextURL(upcoming.next)
+            return upcoming.results
         }
         catch {
             throw error
@@ -143,6 +155,10 @@ fileprivate struct NextURL {
             return URL(string: nextURL)
         case .mock:
             return NewsMockEndpoint(path: nextURL).asURL
+        case .invalidUrlMock:
+            return nil
+        case .decodingErrorMock:
+            return NewsMockEndpoint(path: "newsDecodingError.json").asURL
         }
     }
 }
