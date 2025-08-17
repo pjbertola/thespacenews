@@ -1,0 +1,718 @@
+{
+    "id": "49678ae6-8664-4d60-9aa2-622c087ed917",
+    "url": "https://lldev.thespacedevs.com/2.3.0/launches/49678ae6-8664-4d60-9aa2-622c087ed917/",
+    "name": "Soyuz 2.1a | Bion-M No. 2",
+    "response_mode": "detailed",
+    "slug": "soyuz-21a-bion-m-no-2",
+    "launch_designator": null,
+    "status": {
+        "id": 8,
+        "name": "To Be Confirmed",
+        "abbrev": "TBC",
+        "description": "Awaiting official confirmation - current date is known with some certainty."
+    },
+    "last_updated": "2025-07-11T13:17:38Z",
+    "net": "2025-08-20T17:13:00Z",
+    "net_precision": {
+        "id": 1,
+        "name": "Minute",
+        "abbrev": "MIN",
+        "description": "The T-0 is accurate to the minute."
+    },
+    "window_end": "2025-08-20T17:13:00Z",
+    "window_start": "2025-08-20T17:13:00Z",
+    "image": {
+        "id": 1828,
+        "name": "[AUTO] Soyuz 2.1a - image",
+        "image_url": "https://thespacedevs-dev.nyc3.digitaloceanspaces.com/media/images/soyuz_2.1a_image_20230805184309.jpg",
+        "thumbnail_url": "https://thespacedevs-dev.nyc3.digitaloceanspaces.com/media/images/255bauto255d__image_thumbnail_20240305193857.jpeg",
+        "credit": null,
+        "license": {
+            "id": 1,
+            "name": "Unknown",
+            "priority": 9,
+            "link": null
+        },
+        "single_use": true,
+        "variants": []
+    },
+    "infographic": null,
+    "probability": null,
+    "weather_concerns": null,
+    "failreason": "",
+    "hashtag": null,
+    "launch_service_provider": {
+        "response_mode": "normal",
+        "id": 63,
+        "url": "https://lldev.thespacedevs.com/2.3.0/agencies/63/",
+        "name": "Russian Federal Space Agency (ROSCOSMOS)",
+        "abbrev": "RFSA",
+        "type": {
+            "id": 1,
+            "name": "Government"
+        },
+        "featured": true,
+        "country": [
+            {
+                "id": 5,
+                "name": "Russia",
+                "alpha_2_code": "RU",
+                "alpha_3_code": "RUS",
+                "nationality_name": "Russian",
+                "nationality_name_composed": "Russo"
+            }
+        ],
+        "description": "The Roscosmos State Corporation for Space Activities, commonly known as Roscosmos, is the governmental body responsible for the space science program of the Russian Federation and general aerospace research. Soyuz has many launch locations the Russian sites are Baikonur, Plesetsk and Vostochny however Ariane also purchases the vehicle and launches it from French Guiana.",
+        "administrator": "Administrator: Yuri Borisov",
+        "founding_year": 1992,
+        "launchers": "Soyuz",
+        "spacecraft": "Soyuz",
+        "parent": null,
+        "image": {
+            "id": 25,
+            "name": "[AUTO] Russian Federal Space Agency (ROSCOSMOS) - image",
+            "image_url": "https://thespacedevs-dev.nyc3.digitaloceanspaces.com/media/images/russian2520federal2520space2520agency25202528roscosmos2529_image_20190207032459.jpeg",
+            "thumbnail_url": "https://thespacedevs-dev.nyc3.digitaloceanspaces.com/media/images/255bauto255d__image_thumbnail_20240305184652.jpeg",
+            "credit": null,
+            "license": {
+                "id": 1,
+                "name": "Unknown",
+                "priority": 9,
+                "link": null
+            },
+            "single_use": true,
+            "variants": []
+        },
+        "logo": {
+            "id": 177,
+            "name": "[AUTO] Russian Federal Space Agency (ROSCOSMOS) - logo",
+            "image_url": "https://thespacedevs-dev.nyc3.digitaloceanspaces.com/media/images/russian2520federal2520space2520agency25202528roscosmos2529_logo_20190207032459.png",
+            "thumbnail_url": "https://thespacedevs-dev.nyc3.digitaloceanspaces.com/media/images/255bauto255d__image_thumbnail_20240305185118.png",
+            "credit": null,
+            "license": {
+                "id": 1,
+                "name": "Unknown",
+                "priority": 9,
+                "link": null
+            },
+            "single_use": true,
+            "variants": []
+        },
+        "social_logo": {
+            "id": 89,
+            "name": "[AUTO] Russian Federal Space Agency (ROSCOSMOS) - social_logo",
+            "image_url": "https://thespacedevs-dev.nyc3.digitaloceanspaces.com/media/images/russian2520federal2520space2520agency25202528roscosmos2529_nation_20230531052758.jpg",
+            "thumbnail_url": "https://thespacedevs-dev.nyc3.digitaloceanspaces.com/media/images/255bauto255d__image_thumbnail_20240305184841.jpeg",
+            "credit": null,
+            "license": {
+                "id": 1,
+                "name": "Unknown",
+                "priority": 9,
+                "link": null
+            },
+            "single_use": true,
+            "variants": []
+        },
+        "total_launch_count": 333,
+        "consecutive_successful_launches": 57,
+        "successful_launches": 322,
+        "failed_launches": 11,
+        "pending_launches": 5,
+        "consecutive_successful_landings": 0,
+        "successful_landings": 0,
+        "failed_landings": 0,
+        "attempted_landings": 0,
+        "successful_landings_spacecraft": 199,
+        "failed_landings_spacecraft": 7,
+        "attempted_landings_spacecraft": 206,
+        "successful_landings_payload": 0,
+        "failed_landings_payload": 1,
+        "attempted_landings_payload": 1,
+        "info_url": "https://en.roscosmos.ru/",
+        "wiki_url": "https://en.wikipedia.org/wiki/Russian_Federal_Space_Agency",
+        "social_media_links": []
+    },
+    "rocket": {
+        "id": 8083,
+        "configuration": {
+            "response_mode": "detailed",
+            "id": 24,
+            "url": "https://lldev.thespacedevs.com/2.3.0/launcher_configurations/24/",
+            "name": "Soyuz 2.1a",
+            "families": [
+                {
+                    "response_mode": "detailed",
+                    "id": 147,
+                    "name": "Soyuz",
+                    "manufacturer": [
+                        {
+                            "response_mode": "normal",
+                            "id": 111,
+                            "url": "https://lldev.thespacedevs.com/2.3.0/agencies/111/",
+                            "name": "Progress Rocket Space Center",
+                            "abbrev": "PRSC",
+                            "type": {
+                                "id": 3,
+                                "name": "Commercial"
+                            },
+                            "featured": false,
+                            "country": [
+                                {
+                                    "id": 5,
+                                    "name": "Russia",
+                                    "alpha_2_code": "RU",
+                                    "alpha_3_code": "RUS",
+                                    "nationality_name": "Russian",
+                                    "nationality_name_composed": "Russo"
+                                }
+                            ],
+                            "description": "Progress Rocket Space Centre, formerly known as TsSKB-Progress, is a space science and aerospace research company which is known for manufacturing launch vehicles and satellites. Most notably, Progress Rocket Space Centre is the manufacturer of Soyuz launch vehicles.",
+                            "administrator": "CEO: Dmitry Baranov",
+                            "founding_year": 1996,
+                            "launchers": "",
+                            "spacecraft": "",
+                            "parent": null,
+                            "image": null,
+                            "logo": {
+                                "id": 171,
+                                "name": "[AUTO] Progress Rocket Space Center - logo",
+                                "image_url": "https://thespacedevs-dev.nyc3.digitaloceanspaces.com/media/images/progress2520rocket2520space2520center_logo_20210313175054.png",
+                                "thumbnail_url": "https://thespacedevs-dev.nyc3.digitaloceanspaces.com/media/images/255bauto255d__image_thumbnail_20240305185104.png",
+                                "credit": null,
+                                "license": {
+                                    "id": 1,
+                                    "name": "Unknown",
+                                    "priority": 9,
+                                    "link": null
+                                },
+                                "single_use": true,
+                                "variants": []
+                            },
+                            "social_logo": null,
+                            "total_launch_count": 45,
+                            "consecutive_successful_launches": 3,
+                            "successful_launches": 44,
+                            "failed_launches": 1,
+                            "pending_launches": 0,
+                            "consecutive_successful_landings": 0,
+                            "successful_landings": 0,
+                            "failed_landings": 0,
+                            "attempted_landings": 0,
+                            "successful_landings_spacecraft": 0,
+                            "failed_landings_spacecraft": 0,
+                            "attempted_landings_spacecraft": 0,
+                            "successful_landings_payload": 0,
+                            "failed_landings_payload": 0,
+                            "attempted_landings_payload": 0,
+                            "info_url": "https://en.samspace.ru/",
+                            "wiki_url": "https://en.wikipedia.org/wiki/Progress_Rocket_Space_Centre",
+                            "social_media_links": []
+                        }
+                    ],
+                    "parent": null,
+                    "description": "",
+                    "active": true,
+                    "maiden_flight": "1965-12-27",
+                    "total_launch_count": 1026,
+                    "consecutive_successful_launches": 122,
+                    "successful_launches": 995,
+                    "failed_launches": 31,
+                    "pending_launches": 7,
+                    "attempted_landings": 0,
+                    "successful_landings": 0,
+                    "failed_landings": 0,
+                    "consecutive_successful_landings": 0
+                },
+                {
+                    "response_mode": "detailed",
+                    "id": 190,
+                    "name": "Soyuz 2",
+                    "manufacturer": [
+                        {
+                            "response_mode": "normal",
+                            "id": 111,
+                            "url": "https://lldev.thespacedevs.com/2.3.0/agencies/111/",
+                            "name": "Progress Rocket Space Center",
+                            "abbrev": "PRSC",
+                            "type": {
+                                "id": 3,
+                                "name": "Commercial"
+                            },
+                            "featured": false,
+                            "country": [
+                                {
+                                    "id": 5,
+                                    "name": "Russia",
+                                    "alpha_2_code": "RU",
+                                    "alpha_3_code": "RUS",
+                                    "nationality_name": "Russian",
+                                    "nationality_name_composed": "Russo"
+                                }
+                            ],
+                            "description": "Progress Rocket Space Centre, formerly known as TsSKB-Progress, is a space science and aerospace research company which is known for manufacturing launch vehicles and satellites. Most notably, Progress Rocket Space Centre is the manufacturer of Soyuz launch vehicles.",
+                            "administrator": "CEO: Dmitry Baranov",
+                            "founding_year": 1996,
+                            "launchers": "",
+                            "spacecraft": "",
+                            "parent": null,
+                            "image": null,
+                            "logo": {
+                                "id": 171,
+                                "name": "[AUTO] Progress Rocket Space Center - logo",
+                                "image_url": "https://thespacedevs-dev.nyc3.digitaloceanspaces.com/media/images/progress2520rocket2520space2520center_logo_20210313175054.png",
+                                "thumbnail_url": "https://thespacedevs-dev.nyc3.digitaloceanspaces.com/media/images/255bauto255d__image_thumbnail_20240305185104.png",
+                                "credit": null,
+                                "license": {
+                                    "id": 1,
+                                    "name": "Unknown",
+                                    "priority": 9,
+                                    "link": null
+                                },
+                                "single_use": true,
+                                "variants": []
+                            },
+                            "social_logo": null,
+                            "total_launch_count": 45,
+                            "consecutive_successful_launches": 3,
+                            "successful_launches": 44,
+                            "failed_launches": 1,
+                            "pending_launches": 0,
+                            "consecutive_successful_landings": 0,
+                            "successful_landings": 0,
+                            "failed_landings": 0,
+                            "attempted_landings": 0,
+                            "successful_landings_spacecraft": 0,
+                            "failed_landings_spacecraft": 0,
+                            "attempted_landings_spacecraft": 0,
+                            "successful_landings_payload": 0,
+                            "failed_landings_payload": 0,
+                            "attempted_landings_payload": 0,
+                            "info_url": "https://en.samspace.ru/",
+                            "wiki_url": "https://en.wikipedia.org/wiki/Progress_Rocket_Space_Centre",
+                            "social_media_links": []
+                        }
+                    ],
+                    "parent": {
+                        "response_mode": "normal",
+                        "id": 147,
+                        "name": "Soyuz",
+                        "manufacturer": [
+                            {
+                                "response_mode": "normal",
+                                "id": 111,
+                                "url": "https://lldev.thespacedevs.com/2.3.0/agencies/111/",
+                                "name": "Progress Rocket Space Center",
+                                "abbrev": "PRSC",
+                                "type": {
+                                    "id": 3,
+                                    "name": "Commercial"
+                                },
+                                "featured": false,
+                                "country": [
+                                    {
+                                        "id": 5,
+                                        "name": "Russia",
+                                        "alpha_2_code": "RU",
+                                        "alpha_3_code": "RUS",
+                                        "nationality_name": "Russian",
+                                        "nationality_name_composed": "Russo"
+                                    }
+                                ],
+                                "description": "Progress Rocket Space Centre, formerly known as TsSKB-Progress, is a space science and aerospace research company which is known for manufacturing launch vehicles and satellites. Most notably, Progress Rocket Space Centre is the manufacturer of Soyuz launch vehicles.",
+                                "administrator": "CEO: Dmitry Baranov",
+                                "founding_year": 1996,
+                                "launchers": "",
+                                "spacecraft": "",
+                                "parent": null,
+                                "image": null,
+                                "logo": {
+                                    "id": 171,
+                                    "name": "[AUTO] Progress Rocket Space Center - logo",
+                                    "image_url": "https://thespacedevs-dev.nyc3.digitaloceanspaces.com/media/images/progress2520rocket2520space2520center_logo_20210313175054.png",
+                                    "thumbnail_url": "https://thespacedevs-dev.nyc3.digitaloceanspaces.com/media/images/255bauto255d__image_thumbnail_20240305185104.png",
+                                    "credit": null,
+                                    "license": {
+                                        "id": 1,
+                                        "name": "Unknown",
+                                        "priority": 9,
+                                        "link": null
+                                    },
+                                    "single_use": true,
+                                    "variants": []
+                                },
+                                "social_logo": null
+                            }
+                        ],
+                        "parent": null
+                    },
+                    "description": "",
+                    "active": true,
+                    "maiden_flight": "2004-11-08",
+                    "total_launch_count": 193,
+                    "consecutive_successful_launches": 122,
+                    "successful_launches": 186,
+                    "failed_launches": 7,
+                    "pending_launches": 7,
+                    "attempted_landings": 0,
+                    "successful_landings": 0,
+                    "failed_landings": 0,
+                    "consecutive_successful_landings": 0
+                }
+            ],
+            "full_name": "Soyuz 2.1a",
+            "variant": "",
+            "active": true,
+            "is_placeholder": false,
+            "manufacturer": {
+                "response_mode": "normal",
+                "id": 111,
+                "url": "https://lldev.thespacedevs.com/2.3.0/agencies/111/",
+                "name": "Progress Rocket Space Center",
+                "abbrev": "PRSC",
+                "type": {
+                    "id": 3,
+                    "name": "Commercial"
+                },
+                "featured": false,
+                "country": [
+                    {
+                        "id": 5,
+                        "name": "Russia",
+                        "alpha_2_code": "RU",
+                        "alpha_3_code": "RUS",
+                        "nationality_name": "Russian",
+                        "nationality_name_composed": "Russo"
+                    }
+                ],
+                "description": "Progress Rocket Space Centre, formerly known as TsSKB-Progress, is a space science and aerospace research company which is known for manufacturing launch vehicles and satellites. Most notably, Progress Rocket Space Centre is the manufacturer of Soyuz launch vehicles.",
+                "administrator": "CEO: Dmitry Baranov",
+                "founding_year": 1996,
+                "launchers": "",
+                "spacecraft": "",
+                "parent": null,
+                "image": null,
+                "logo": {
+                    "id": 171,
+                    "name": "[AUTO] Progress Rocket Space Center - logo",
+                    "image_url": "https://thespacedevs-dev.nyc3.digitaloceanspaces.com/media/images/progress2520rocket2520space2520center_logo_20210313175054.png",
+                    "thumbnail_url": "https://thespacedevs-dev.nyc3.digitaloceanspaces.com/media/images/255bauto255d__image_thumbnail_20240305185104.png",
+                    "credit": null,
+                    "license": {
+                        "id": 1,
+                        "name": "Unknown",
+                        "priority": 9,
+                        "link": null
+                    },
+                    "single_use": true,
+                    "variants": []
+                },
+                "social_logo": null,
+                "total_launch_count": 45,
+                "consecutive_successful_launches": 3,
+                "successful_launches": 44,
+                "failed_launches": 1,
+                "pending_launches": 0,
+                "consecutive_successful_landings": 0,
+                "successful_landings": 0,
+                "failed_landings": 0,
+                "attempted_landings": 0,
+                "successful_landings_spacecraft": 0,
+                "failed_landings_spacecraft": 0,
+                "attempted_landings_spacecraft": 0,
+                "successful_landings_payload": 0,
+                "failed_landings_payload": 0,
+                "attempted_landings_payload": 0,
+                "info_url": "https://en.samspace.ru/",
+                "wiki_url": "https://en.wikipedia.org/wiki/Progress_Rocket_Space_Centre",
+                "social_media_links": []
+            },
+            "program": [],
+            "reusable": false,
+            "image": {
+                "id": 1828,
+                "name": "[AUTO] Soyuz 2.1a - image",
+                "image_url": "https://thespacedevs-dev.nyc3.digitaloceanspaces.com/media/images/soyuz_2.1a_image_20230805184309.jpg",
+                "thumbnail_url": "https://thespacedevs-dev.nyc3.digitaloceanspaces.com/media/images/255bauto255d__image_thumbnail_20240305193857.jpeg",
+                "credit": null,
+                "license": {
+                    "id": 1,
+                    "name": "Unknown",
+                    "priority": 9,
+                    "link": null
+                },
+                "single_use": true,
+                "variants": []
+            },
+            "info_url": null,
+            "wiki_url": "https://en.wikipedia.org/wiki/Soyuz-2#Soyuz-2.1a",
+            "description": "The Soyuz 2.1A converted the flight control system from analog to digital, which allowed launch from fixed platforms. It also allowed big fairings and payloads.\r\nIt is currently used for crewed Soyuz and Progress flights to the ISS.",
+            "alias": "",
+            "min_stage": 2,
+            "max_stage": 3,
+            "length": 46.3,
+            "diameter": 2.95,
+            "maiden_flight": "2004-11-04",
+            "launch_cost": 80000000,
+            "launch_mass": 312.0,
+            "leo_capacity": 7020.0,
+            "gto_capacity": 2810.0,
+            "geo_capacity": null,
+            "sso_capacity": 4230.0,
+            "to_thrust": 4149.0,
+            "apogee": null,
+            "total_launch_count": 52,
+            "consecutive_successful_launches": 45,
+            "successful_launches": 51,
+            "failed_launches": 1,
+            "pending_launches": 2,
+            "attempted_landings": 0,
+            "successful_landings": 0,
+            "failed_landings": 0,
+            "consecutive_successful_landings": 0,
+            "fastest_turnaround": "P7DT6H41M58S"
+        },
+        "launcher_stage": [],
+        "spacecraft_stage": [],
+        "payloads": []
+    },
+    "mission": {
+        "id": 6637,
+        "name": "Bion-M No. 2",
+        "type": "Biology",
+        "description": "Bion-M is the next generation of Russian biological research satellites. While retaining the Vostok/Zenit-derived reentry module of the earlier Bion, the propulsion module has been replace by a Yantar type module, which provides maneuvering capabilities and longer mission support. The mission duration has been increased to up to 6 months by using solar cells for energy generation. The weight of scientific equipment has been increased by 100 kilograms.",
+        "image": null,
+        "orbit": {
+            "id": 8,
+            "name": "Low Earth Orbit",
+            "abbrev": "LEO",
+            "celestial_body": {
+                "response_mode": "list",
+                "id": 1,
+                "name": "Earth"
+            }
+        },
+        "agencies": [],
+        "info_urls": [],
+        "vid_urls": []
+    },
+    "pad": {
+        "id": 20,
+        "url": "https://lldev.thespacedevs.com/2.3.0/pads/20/",
+        "active": true,
+        "agencies": [],
+        "name": "31/6",
+        "image": {
+            "id": 1467,
+            "name": "Soyuz 2.1a liftoff from pad 31/6 (Progress MS-25)",
+            "image_url": "https://thespacedevs-dev.nyc3.digitaloceanspaces.com/media/images/soyuz25202.1a_image_20231231162517.jpg",
+            "thumbnail_url": "https://thespacedevs-dev.nyc3.digitaloceanspaces.com/media/images/255bauto255d__image_thumbnail_20240305192846.jpeg",
+            "credit": "Roscosmos",
+            "license": {
+                "id": 14,
+                "name": "Roscosmos Image Use Policy",
+                "priority": 3,
+                "link": "https://www.roscosmos.ru/22650/"
+            },
+            "single_use": true,
+            "variants": []
+        },
+        "description": "",
+        "info_url": null,
+        "wiki_url": "https://en.wikipedia.org/wiki/Baikonur_Cosmodrome_Site_31",
+        "map_url": "https://www.google.com/maps?q=45.996034,63.564003",
+        "latitude": 45.996034,
+        "longitude": 63.564003,
+        "country": {
+            "id": 44,
+            "name": "Kazakhstan",
+            "alpha_2_code": "KZ",
+            "alpha_3_code": "KAZ",
+            "nationality_name": "Kazakh",
+            "nationality_name_composed": "Kazakhstani"
+        },
+        "map_image": "https://thespacedevs-dev.nyc3.digitaloceanspaces.com/media/map_images/pad_20_20200803143516.jpg",
+        "total_launch_count": 423,
+        "orbital_launch_attempt_count": 423,
+        "fastest_turnaround": "P1DT23H9M9S",
+        "location": {
+            "response_mode": "normal",
+            "id": 15,
+            "url": "https://lldev.thespacedevs.com/2.3.0/locations/15/",
+            "name": "Baikonur Cosmodrome, Republic of Kazakhstan",
+            "celestial_body": {
+                "response_mode": "normal",
+                "id": 1,
+                "name": "Earth",
+                "type": {
+                    "id": 1,
+                    "name": "Planet"
+                },
+                "diameter": 12742000.0,
+                "mass": 5.972168e+24,
+                "gravity": 9.80655,
+                "length_of_day": "1 00:00:00",
+                "atmosphere": true,
+                "image": {
+                    "id": 2040,
+                    "name": "Earth (Apollo 17)",
+                    "image_url": "https://thespacedevs-dev.nyc3.digitaloceanspaces.com/media/images/earth_2528apol_image_20240402194304.jpeg",
+                    "thumbnail_url": "https://thespacedevs-dev.nyc3.digitaloceanspaces.com/media/images/earth_2528apol_image_thumbnail_20240402194305.jpeg",
+                    "credit": "NASA",
+                    "license": {
+                        "id": 4,
+                        "name": "NASA Image and Media Guidelines",
+                        "priority": 0,
+                        "link": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+                    },
+                    "single_use": true,
+                    "variants": []
+                },
+                "description": "Earth is the third planet from the Sun and the only astronomical object known to harbor life.",
+                "wiki_url": "https://en.wikipedia.org/wiki/Earth",
+                "total_attempted_launches": 7233,
+                "successful_launches": 6687,
+                "failed_launches": 546,
+                "total_attempted_landings": 1159,
+                "successful_landings": 1114,
+                "failed_landings": 45
+            },
+            "active": true,
+            "country": {
+                "id": 44,
+                "name": "Kazakhstan",
+                "alpha_2_code": "KZ",
+                "alpha_3_code": "KAZ",
+                "nationality_name": "Kazakh",
+                "nationality_name_composed": "Kazakhstani"
+            },
+            "description": "The Baikonur Cosmodrome is a spaceport operated by Russia within Kazakhstan. Located in the Kazakh city of Baikonur, it is the largest operational space launch facility in terms of area. All Russian crewed spaceflights are launched from Baikonur.",
+            "image": {
+                "id": 2198,
+                "name": "Soyuz launch pad at the Baikonur Cosmodrome",
+                "image_url": "https://thespacedevs-dev.nyc3.digitaloceanspaces.com/media/images/soyuz_launch_pa_image_20240918150530.jpg",
+                "thumbnail_url": "https://thespacedevs-dev.nyc3.digitaloceanspaces.com/media/images/soyuz_launch_pa_image_thumbnail_20240918150530.jpeg",
+                "credit": "NASA/Bill Ingalls",
+                "license": {
+                    "id": 4,
+                    "name": "NASA Image and Media Guidelines",
+                    "priority": 0,
+                    "link": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+                },
+                "single_use": true,
+                "variants": []
+            },
+            "map_image": "https://thespacedevs-dev.nyc3.digitaloceanspaces.com/media/map_images/location_15_20200803142517.jpg",
+            "longitude": 63.305,
+            "latitude": 45.965,
+            "timezone_name": "Asia/Qyzylorda",
+            "total_launch_count": 1556,
+            "total_landing_count": 0
+        }
+    },
+    "webcast_live": false,
+    "program": [],
+    "orbital_launch_attempt_count": 7034,
+    "location_launch_attempt_count": 1557,
+    "pad_launch_attempt_count": 424,
+    "agency_launch_attempt_count": 334,
+    "orbital_launch_attempt_count_year": 185,
+    "location_launch_attempt_count_year": 4,
+    "pad_launch_attempt_count_year": 4,
+    "agency_launch_attempt_count_year": 5,
+    "flightclub_url": null,
+    "updates": [
+        {
+            "id": 11507,
+            "profile_image": "https://thespacedevs-dev.nyc3.digitaloceanspaces.com/media/profile_images/cosmic2520penguin_profile_20210817212020.png",
+            "comment": "NET August 20.",
+            "info_url": "https://forum.nasaspaceflight.com/index.php?topic=26990.msg2700462#msg2700462",
+            "created_by": "Cosmic_Penguin",
+            "created_on": "2025-07-11T13:17:00Z"
+        },
+        {
+            "id": 10923,
+            "profile_image": "https://thespacedevs-dev.nyc3.digitaloceanspaces.com/media/profile_images/cosmic2520penguin_profile_20210817212020.png",
+            "comment": "NET July 20.",
+            "info_url": "https://kosmodrom.space/raspisanie-zapuskov",
+            "created_by": "Cosmic_Penguin",
+            "created_on": "2025-05-08T08:21:00Z"
+        },
+        {
+            "id": 9992,
+            "profile_image": "https://thespacedevs-dev.nyc3.digitaloceanspaces.com/media/profile_images/cosmic2520penguin_profile_20210817212020.png",
+            "comment": "NET July.",
+            "info_url": "https://kosmodrom.space/raspisanie-zapuskov",
+            "created_by": "Cosmic_Penguin",
+            "created_on": "2025-02-03T18:30:00Z"
+        },
+        {
+            "id": 11238,
+            "profile_image": "https://thespacedevs-dev.nyc3.digitaloceanspaces.com/media/profile_images/cosmic2520penguin_profile_20210817212020.png",
+            "comment": "NET August 25.",
+            "info_url": "https://forum.novosti-kosmonavtiki.ru/index.php?msg=2733497",
+            "created_by": "Cosmic_Penguin",
+            "created_on": "2025-06-10T12:07:00Z"
+        },
+        {
+            "id": 9641,
+            "profile_image": "https://thespacedevs-dev.nyc3.digitaloceanspaces.com/media/profile_images/cosmic2520penguin_profile_20210817212020.png",
+            "comment": "NET March 25.",
+            "info_url": "https://kosmodrom.space/raspisanie-zapuskov",
+            "created_by": "Cosmic_Penguin",
+            "created_on": "2024-12-26T17:55:00Z"
+        },
+        {
+            "id": 10983,
+            "profile_image": "https://thespacedevs-dev.nyc3.digitaloceanspaces.com/media/profile_images/cosmic2520penguin_profile_20210817212020.png",
+            "comment": "Added launch time.",
+            "info_url": "https://drive.google.com/file/d/1wmfOiEaJayZQLBhjh2qjxqRUM0j8e143/view",
+            "created_by": "Cosmic_Penguin",
+            "created_on": "2025-05-14T17:02:00Z"
+        },
+        {
+            "id": 8749,
+            "profile_image": "https://thespacedevs-dev.nyc3.digitaloceanspaces.com/media/profile_images/cosmic2520penguin_profile_20210817212020.png",
+            "comment": "NET March 2025.",
+            "info_url": "https://x.com/katlinegrey/status/1841471508390027456",
+            "created_by": "Cosmic_Penguin",
+            "created_on": "2024-10-02T16:37:00Z"
+        },
+        {
+            "id": 5590,
+            "profile_image": "https://thespacedevs-dev.nyc3.digitaloceanspaces.com/media/profile_images/cosmic2520penguin_profile_20210817212020.png",
+            "comment": "Added launch.",
+            "info_url": "https://tass.ru/kosmos/19179563",
+            "created_by": "Cosmic_Penguin",
+            "created_on": "2023-11-02T13:35:05Z"
+        },
+        {
+            "id": 7226,
+            "profile_image": "https://thespacedevs-dev.nyc3.digitaloceanspaces.com/media/profile_images/cosmic2520penguin_profile_20210817212020.png",
+            "comment": "NET September 1st.",
+            "info_url": "https://tass.ru/kosmos/20477371",
+            "created_by": "Cosmic_Penguin",
+            "created_on": "2024-04-08T13:18:21Z"
+        },
+        {
+            "id": 7980,
+            "profile_image": "https://thespacedevs-dev.nyc3.digitaloceanspaces.com/media/profile_images/cosmic2520penguin_profile_20210817212020.png",
+            "comment": "NET TBD 2024.",
+            "info_url": "https://kosmodrom.space/raspisanie-zapuskov",
+            "created_by": "Cosmic_Penguin",
+            "created_on": "2024-06-30T19:15:05Z"
+        },
+        {
+            "id": 8385,
+            "profile_image": "https://thespacedevs-dev.nyc3.digitaloceanspaces.com/media/profile_images/cosmic2520penguin_profile_20210817212020.png",
+            "comment": "NET 2025.",
+            "info_url": "https://prokosmos.ru/2024/08/21/gendirektor-rkts-progress-eksperimenti-na-bione-m-pomogut-v-poletakh-lyudei-na-lunu-i-mars",
+            "created_by": "Cosmic_Penguin",
+            "created_on": "2024-08-24T12:36:15Z"
+        }
+    ],
+    "info_urls": [],
+    "vid_urls": [],
+    "timeline": [],
+    "pad_turnaround": "P47DT21H40M20S",
+    "mission_patches": []
+}

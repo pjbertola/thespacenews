@@ -1,0 +1,127 @@
+{
+    "count": 159,
+    "next": "newsNextNil.json",
+    "previous": null,
+    "results": [
+        {
+            "id": "a2f73993-79f6-4228-bebc-0ada6840e503",
+            "url": "https://lldev.thespacedevs.com/2.3.0/launches/a2f73993-79f6-4228-bebc-0ada6840e503/",
+            "name": "Falcon 9 Block 5 | Starlink Group 10-11",
+            "response_mode": "list",
+            "slug": "falcon-9-block-5-starlink-group-10-11",
+            "launch_designator": null,
+            "status": {
+                "id": 1,
+                "name": "Go for Launch",
+                "abbrev": "Go",
+                "description": "Current T-0 confirmed by official or reliable sources."
+            },
+            "last_updated": "2025-08-09T16:58:42Z",
+            "net": "2025-08-16T11:35:00Z",
+            "net_precision": {
+                "id": 1,
+                "name": "Minute",
+                "abbrev": "MIN",
+                "description": "The T-0 is accurate to the minute."
+            },
+            "window_end": "2025-08-16T15:35:00Z",
+            "window_start": "2025-08-16T11:35:00Z",
+            "image": {
+                "id": 1296,
+                "name": "Starlink night fairing",
+                "image_url": "https://thespacedevs-dev.nyc3.digitaloceanspaces.com/media/images/falcon2520925_image_20221009234147.png",
+                "thumbnail_url": "https://thespacedevs-dev.nyc3.digitaloceanspaces.com/media/images/255bauto255d__image_thumbnail_20240305192320.png",
+                "credit": "SpaceX",
+                "license": {
+                    "id": 5,
+                    "name": "CC BY-NC 2.0",
+                    "priority": 1,
+                    "link": "https://creativecommons.org/licenses/by-nc/2.0/"
+                },
+                "single_use": false,
+                "variants": []
+            },
+            "infographic": null
+        },
+        {
+            "id": "80af8d63-64aa-4d16-9abd-bdbe167cecb9",
+            "url": "https://lldev.thespacedevs.com/2.3.0/launches/80af8d63-64aa-4d16-9abd-bdbe167cecb9/",
+            "name": "Falcon 9 Block 5 | Starlink Group 17-6",
+            "response_mode": "list",
+            "slug": "falcon-9-block-5-starlink-group-17-6",
+            "launch_designator": null,
+            "status": {
+                "id": 1,
+                "name": "Go for Launch",
+                "abbrev": "Go",
+                "description": "Current T-0 confirmed by official or reliable sources."
+            },
+            "last_updated": "2025-08-08T14:44:22Z",
+            "net": "2025-08-17T15:44:00Z",
+            "net_precision": {
+                "id": 1,
+                "name": "Minute",
+                "abbrev": "MIN",
+                "description": "The T-0 is accurate to the minute."
+            },
+            "window_end": "2025-08-17T19:44:00Z",
+            "window_start": "2025-08-17T15:44:00Z",
+            "image": {
+                "id": 1296,
+                "name": "Starlink night fairing",
+                "image_url": "https://thespacedevs-dev.nyc3.digitaloceanspaces.com/media/images/falcon2520925_image_20221009234147.png",
+                "thumbnail_url": "https://thespacedevs-dev.nyc3.digitaloceanspaces.com/media/images/255bauto255d__image_thumbnail_20240305192320.png",
+                "credit": "SpaceX",
+                "license": {
+                    "id": 5,
+                    "name": "CC BY-NC 2.0",
+                    "priority": 1,
+                    "link": "https://creativecommons.org/licenses/by-nc/2.0/"
+                },
+                "single_use": false,
+                "variants": []
+            },
+            "infographic": null
+        },
+        {
+            "id": "49678ae6-8664-4d60-9aa2-622c087ed917",
+            "url": "https://lldev.thespacedevs.com/2.3.0/launches/49678ae6-8664-4d60-9aa2-622c087ed917/",
+            "name": "Soyuz 2.1a | Bion-M No. 2",
+            "response_mode": "list",
+            "slug": "soyuz-21a-bion-m-no-2",
+            "launch_designator": null,
+            "status": {
+                "id": 8,
+                "name": "To Be Confirmed",
+                "abbrev": "TBC",
+                "description": "Awaiting official confirmation - current date is known with some certainty."
+            },
+            "last_updated": "2025-07-11T13:17:38Z",
+            "net": "2025-08-20T17:13:00Z",
+            "net_precision": {
+                "id": 1,
+                "name": "Minute",
+                "abbrev": "MIN",
+                "description": "The T-0 is accurate to the minute."
+            },
+            "window_end": "2025-08-20T17:13:00Z",
+            "window_start": "2025-08-20T17:13:00Z",
+            "image": {
+                "id": 1828,
+                "name": "[AUTO] Soyuz 2.1a - image",
+                "image_url": "https://thespacedevs-dev.nyc3.digitaloceanspaces.com/media/images/soyuz_2.1a_image_20230805184309.jpg",
+                "thumbnail_url": "https://thespacedevs-dev.nyc3.digitaloceanspaces.com/media/images/255bauto255d__image_thumbnail_20240305193857.jpeg",
+                "credit": null,
+                "license": {
+                    "id": 1,
+                    "name": "Unknown",
+                    "priority": 9,
+                    "link": null
+                },
+                "single_use": true,
+                "variants": []
+            },
+            "infographic": null
+        }
+    ]
+}
