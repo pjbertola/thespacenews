@@ -93,8 +93,8 @@ class SpaceNewsRepositoryDefault: NewsArticlesRepository {
         }
     }
     
-    func fetchArticleDetails(from urlString: String?) async throws -> ArticleDetails {
-        guard let urlString = urlString, let url = URL(string: urlString) else {
+    func fetchArticleDetails(from url: URL?) async throws -> ArticleDetails {
+        guard let url = url else {
             throw DataError.invalidURL
         }
         do {
