@@ -45,6 +45,7 @@ extension LaunchCard {
                     .background(Color.cyan)
                     .cornerRadius(10)
                     .foregroundStyle(.white)
+                    .padding(5)
                 ZStack(alignment: .bottomLeading) {
                     gradient
                     VStack(alignment: .leading) {

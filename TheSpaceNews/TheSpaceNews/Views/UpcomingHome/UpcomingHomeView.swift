@@ -13,34 +13,42 @@ struct UpcomingHomeView: View {
         self.viewModel = ViewModel(repository: repository)
     }
     var body: some View {
-        NavigationSplitView {
+        NavigationStack {
             List {
                 Text("Lunches")
                     .font(.headline)
                 TabView {
                     ForEach(viewModel.launches, id: \.self) { launch in
-                        LaunchCard(launchDetails: launch)
+                        NavigationLink(value: launch) {
+                            LaunchCard(launchDetails: launch)
+                        }
                     }
                 }
                 .tabViewStyle(.page)
                 .aspectRatio(3 / 2, contentMode: .fit)
                 .listRowInsets(EdgeInsets())
+                
                 Text("Events")
                     .font(.headline)
                 TabView {
                     ForEach(viewModel.events, id: \.self) { event in
-                        EventCard(eventDetails: event)
+                        NavigationLink(value: event) {
+                            EventCard(eventDetails: event)
+                        }
                     }
                 }
                 .tabViewStyle(.page)
                 .aspectRatio(3 / 2, contentMode: .fit)
                 .listRowInsets(EdgeInsets())
-                }
+            }
             .listStyle(.inset)
             .navigationTitle("Upcoming")
-        } detail: {
-            Text("Select an upcoming lunch or event.")
-        }.task {
+            .navigationDestination(for: LaunchDetails.self) { launchDetails in LaunchDetailView(launchDetails: launchDetails)
+            }
+            .navigationDestination(for: EventDetails.self) { eventDetails in EventDetailView(eventDetails: eventDetails)
+            }
+        }
+        .task {
             await viewModel.onAppear()
         }
     }
