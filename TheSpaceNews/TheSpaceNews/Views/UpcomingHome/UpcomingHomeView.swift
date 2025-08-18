@@ -14,38 +14,42 @@ struct UpcomingHomeView: View {
     }
     var body: some View {
         NavigationStack {
-            List {
-                Text("Lunches")
-                    .font(.headline)
-                TabView {
-                    ForEach(viewModel.launches, id: \.self) { launch in
-                        NavigationLink(value: launch) {
-                            LaunchCard(launchDetails: launch)
+            if viewModel.isLoading {
+                LoadingView()
+            } else {
+                List {
+                    Text("Lunches")
+                        .font(.headline)
+                    TabView {
+                        ForEach(viewModel.launches, id: \.self) { launch in
+                            NavigationLink(value: launch) {
+                                LaunchCard(launchDetails: launch)
+                            }
                         }
                     }
-                }
-                .tabViewStyle(.page)
-                .aspectRatio(3 / 2, contentMode: .fit)
-                .listRowInsets(EdgeInsets())
-                
-                Text("Events")
-                    .font(.headline)
-                TabView {
-                    ForEach(viewModel.events, id: \.self) { event in
-                        NavigationLink(value: event) {
-                            EventCard(eventDetails: event)
+                    .tabViewStyle(.page)
+                    .aspectRatio(3 / 2, contentMode: .fit)
+                    .listRowInsets(EdgeInsets())
+                    
+                    Text("Events")
+                        .font(.headline)
+                    TabView {
+                        ForEach(viewModel.events, id: \.self) { event in
+                            NavigationLink(value: event) {
+                                EventCard(eventDetails: event)
+                            }
                         }
                     }
+                    .tabViewStyle(.page)
+                    .aspectRatio(3 / 2, contentMode: .fit)
+                    .listRowInsets(EdgeInsets())
                 }
-                .tabViewStyle(.page)
-                .aspectRatio(3 / 2, contentMode: .fit)
-                .listRowInsets(EdgeInsets())
-            }
-            .listStyle(.inset)
-            .navigationTitle("Upcoming")
-            .navigationDestination(for: LaunchDetails.self) { launchDetails in LaunchDetailView(launchDetails: launchDetails)
-            }
-            .navigationDestination(for: EventDetails.self) { eventDetails in EventDetailView(eventDetails: eventDetails)
+                .listStyle(.inset)
+                .navigationTitle("Upcoming")
+                .navigationDestination(for: LaunchDetails.self) { launchDetails in LaunchDetailView(launchDetails: launchDetails)
+                }
+                .navigationDestination(for: EventDetails.self) { eventDetails in EventDetailView(eventDetails: eventDetails)
+                }
             }
         }
         .task {

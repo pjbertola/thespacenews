@@ -5,7 +5,7 @@
 //  Created by Pablo J. Bertola on 15/08/2025.
 //
 
-struct Article: Decodable {
+struct Article: Decodable, Hashable {
     let title: String
     let url: String
     let imageUrl: String

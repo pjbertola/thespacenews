@@ -14,6 +14,7 @@ extension UpcomingHomeView {
         private let repository: UpcomingRepository
         var launches: [LaunchDetails] = []
         var events: [EventDetails] = []
+        var isLoading: Bool = true
         var error: Error?
 
         init(repository: UpcomingRepository = SpaceNewsRepositoryDefault()) {
@@ -26,6 +27,7 @@ extension UpcomingHomeView {
                 async let eventDetails = try await repository.fetchEvents()
                 launches = try await launchDetails
                 events = try await eventDetails
+                isLoading = false
             } catch {
                 self.error = error
             }
