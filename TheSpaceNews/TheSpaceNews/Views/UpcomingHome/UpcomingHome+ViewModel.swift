@@ -20,7 +20,10 @@ extension UpcomingHomeView {
         init(repository: UpcomingRepository = SpaceNewsRepositoryDefault()) {
             self.repository = repository
         }
-
+        func onRefresh(viewError: Binding<Error?>) async {
+            repository.clearCache()
+            await onAppear(viewError: viewError)
+        }
         func onAppear(viewError: Binding<Error?>) async {
             do {
                 isLoading = true

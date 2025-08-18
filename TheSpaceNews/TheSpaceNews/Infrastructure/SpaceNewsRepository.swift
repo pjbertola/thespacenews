@@ -23,7 +23,7 @@ enum DataError: LocalizedError {
         case .invalidURL:
             return "Invalid URL"
         case .networkError(let error):
-            return error.localizedDescription
+            return "NetworkError: \(error.localizedDescription)"
         case .decodingError:
             return "Decoding Error"
         }
@@ -44,6 +44,7 @@ enum DataError: LocalizedError {
 protocol UpcomingRepository {
     func fetchLaunches() async throws -> [LaunchDetails]
     func fetchEvents() async throws -> [EventDetails]
+    func clearCache()
 }
 
 protocol NewsRepository {
@@ -55,6 +56,8 @@ protocol NewsRepository {
 class SpaceNewsRepositoryDefault: UpcomingRepository, NewsRepository {
     private let apiClient: ServiceApiClient
     private var nextURL: NextURL
+    private var launches: [LaunchDetails] = []
+    private var events: [EventDetails] = []
 
     init(apiClient: ServiceApiClient = .live) {
         self.apiClient = apiClient
@@ -62,11 +65,15 @@ class SpaceNewsRepositoryDefault: UpcomingRepository, NewsRepository {
     }
 
     func fetchLaunches() async throws -> [LaunchDetails] {
+        if !launches.isEmpty {
+            return launches
+        }
         guard let url = getLaunchURL() else {
             throw DataError.invalidURL
         }
         do {
             let upcoming: UpcomingLaunches = try await fetchData(from: url)
+            launches = upcoming.results
             return upcoming.results
         }
         catch {
@@ -76,11 +83,15 @@ class SpaceNewsRepositoryDefault: UpcomingRepository, NewsRepository {
     }
 
     func fetchEvents() async throws -> [EventDetails] {
+        if !events.isEmpty {
+            return events
+        }
         guard let url = getEventURL() else {
             throw DataError.invalidURL
         }
         do {
             let upcoming: UpcomingEvents = try await fetchData(from: url)
+            events = upcoming.results
             return upcoming.results
         }
         catch {
@@ -88,6 +99,12 @@ class SpaceNewsRepositoryDefault: UpcomingRepository, NewsRepository {
             throw error
         }
     }
+
+    func clearCache() {
+        launches = []
+        events = []
+    }
+
     func searchArticle(with search: String?) async throws -> [Article] {
         guard let url = getNewsURL(with: search) else {
             throw DataError.invalidURL

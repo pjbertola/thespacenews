@@ -11,24 +11,26 @@ import SwiftUI
 struct EventDetailView: View {
     @State var eventDetails: EventDetails
     var body: some View {
-        VStack {
-            AsyncImage(url: URL(string: eventDetails.image.imageUrl)) { image in
-                image.resizable()
-            } placeholder: {
-                ProgressView()
+        ScrollView {
+            VStack {
+                AsyncImage(url: URL(string: eventDetails.image.imageUrl)) { image in
+                    image.resizable()
+                } placeholder: {
+                    ProgressView()
+                }
+                .aspectRatio(3 / 2, contentMode: .fit)
+                Text(eventDetails.name)
+                    .font(.title)
+                    .bold()
+                    .padding()
+                Text(eventDetails.date)
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .padding(.bottom)
+                Text(eventDetails.description)
+                    .padding()
+                
             }
-            .aspectRatio(3 / 2, contentMode: .fit)
-            Text(eventDetails.name)
-                .font(.title)
-                .bold()
-                .padding()
-            Text(eventDetails.date)
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-                .padding(.bottom)
-            Text(eventDetails.description)
-                .padding()
-            
         }
     }
 }
