@@ -24,8 +24,6 @@ struct EventCard: View {
         .overlay {
             TextOverlay(viewModel: viewModel)
         }
-
-
     }
 }
 extension EventCard {
@@ -59,7 +57,6 @@ extension EventCard {
                                     imageUrl: "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/crew-10_crew_in_image_20250306075802.jpg",
                                     thumbnailUrl: "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/crew-10_crew_in_image_thumbnail_20250306075802.jpeg")
     let date = "2025-09-10T08:55:00Z"
-    let mission = Mission(description: "Satellite officially named for \"space environment detection\" purposes, exact details unknown.")
     let details = EventDetails(name: "SpaceX Crew-10 Post-Flight News Conference", image: imageArticle, date: date, description: "After spending almost five months.")
 
     EventCard(eventDetails: details)

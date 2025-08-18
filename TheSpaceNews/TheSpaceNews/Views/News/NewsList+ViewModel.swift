@@ -5,6 +5,7 @@
 //  Created by Pablo J. Bertola on 18/08/2025.
 //
 import Foundation
+import SwiftUI
 
 extension NewsListView {
     @Observable
@@ -13,7 +14,6 @@ extension NewsListView {
         var repository: NewsRepository
         var filter: NewsFilter
         var isLoading: Bool = true
-        var error: Error?
 
         init(repository: NewsRepository = SpaceNewsRepositoryDefault(),
              filter: NewsFilter = NewsFilterDefault()) {
@@ -21,13 +21,14 @@ extension NewsListView {
             self.filter = filter
         }
 
-        func refreshData() async {
+        func refreshData(viewError: Binding<Error?>) async {
             do {
-                isLoading = false
+                isLoading = true
                 articles = try await repository.fetchArticle()
                 isLoading = false
             } catch {
-                self.error = error
+                isLoading = false
+                viewError.wrappedValue = error
             }
         }
         func filterNews(text: String) -> [Article] {
@@ -43,27 +44,23 @@ extension NewsListView {
             }
             return articles.last == item ? page + 1 : page
         }
-        func loadMoreItems() async {
+        func loadMoreItems(viewError: Binding<Error?>) async {
             do {
                 try await articles.append(contentsOf: repository.fetchNextArticles())
             } catch {
-                self.error = error
+                viewError.wrappedValue = error
             }
             
         }
-        func searchNews(text: String) async {
-            if text.isEmpty {
-                await refreshData()
-            } else {
-                do {
-                    isLoading = false
-                    articles = try await repository.searchArticle(with: text)
-                    isLoading = false
-                } catch {
-                    self.error = error
-                }
+        func searchNews(text: String, viewError: Binding<Error?>) async {
+            do {
+                isLoading = true
+                articles = try await repository.searchArticle(with: text)
+                isLoading = false
+            } catch {
+                isLoading = false
+                viewError.wrappedValue = error
             }
         }
     }
-    
 }

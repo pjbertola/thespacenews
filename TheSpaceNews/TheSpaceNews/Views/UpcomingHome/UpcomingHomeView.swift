@@ -9,6 +9,8 @@ import SwiftUI
 
 struct UpcomingHomeView: View {
     var viewModel: ViewModel
+    @State private var error: Error?
+
     init(repository: UpcomingRepository = SpaceNewsRepositoryDefault()) {
         self.viewModel = ViewModel(repository: repository)
     }
@@ -50,10 +52,15 @@ struct UpcomingHomeView: View {
                 }
                 .navigationDestination(for: EventDetails.self) { eventDetails in EventDetailView(eventDetails: eventDetails)
                 }
+                .errorAlert(error: $error) {
+                    Task {
+                        await viewModel.onAppear(viewError: $error)
+                    }
+                }
             }
         }
         .task {
-            await viewModel.onAppear()
+            await viewModel.onAppear(viewError: $error)
         }
     }
 }

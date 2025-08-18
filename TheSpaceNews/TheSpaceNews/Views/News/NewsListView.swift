@@ -12,7 +12,8 @@ struct NewsListView: View {
     @State private var searchText: String = ""
     @State private var page: Int = 0
     @State private var callText: String = ""
-
+    @State private var error: Error?
+    
     init(repository: NewsRepository = SpaceNewsRepositoryDefault()) {
         self.viewModel = ViewModel(repository: repository)
     }
@@ -34,13 +35,18 @@ struct NewsListView: View {
                 }
                 .padding()
                 List {
-                    ForEach(viewModel.articles, id: \.self) { article in
-                        NavigationLink(value: article) {
-                            NewsRowView(article: article)
-                                .onAppear {
-                                    page = viewModel.loadMoreItemsIfNeeded(page: page, currentItem: article)
-
-                                }
+                    if viewModel.articles.isEmpty,
+                       !viewModel.isLoading {
+                        Text("No results for \"\(callText)\"")
+                    } else {
+                        ForEach(viewModel.articles, id: \.self) { article in
+                            NavigationLink(value: article) {
+                                NewsRowView(article: article)
+                                    .onAppear {
+                                        page = viewModel.loadMoreItemsIfNeeded(page: page, currentItem: article)
+                                        
+                                    }
+                            }
                         }
                     }
                 }
@@ -49,20 +55,25 @@ struct NewsListView: View {
                     WebView(urlString: article.url)
                 }
                 .refreshable {
-                    await viewModel.refreshData()
+                    await viewModel.refreshData(viewError: $error)
                 }
                 .navigationTitle("News Articles")
+                .errorAlert(error: $error) {
+                    Task {
+                        await viewModel.refreshData(viewError: $error)
+                    }
+                }
             }
         }.task {
-            await viewModel.refreshData()
+            await viewModel.refreshData(viewError: $error)
         }.task(id: page) {
             guard page > 0 else {
                 return
             }
-            await viewModel.loadMoreItems()
+            await viewModel.loadMoreItems(viewError: $error)
         }
         .task(id: callText) {
-            await viewModel.searchNews(text: callText)
+            await viewModel.searchNews(text: callText, viewError: $error)
         }
     }
 }

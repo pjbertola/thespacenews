@@ -18,11 +18,13 @@ struct LoadingView: View {
             
             VStack(spacing: 20) {
                 ProgressView()
+                Text("Loading...")
+                    .font(.headline)
             }
             .background {
                 RoundedRectangle(cornerRadius: 20)
                 .fill(.white)
-                .frame(width: 200, height: 200)
+                .frame(width: 150, height: 150)
             }
             .offset(y: -70)
         }

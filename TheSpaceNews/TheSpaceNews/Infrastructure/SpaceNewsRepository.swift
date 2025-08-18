@@ -13,10 +13,32 @@ enum ServiceApiClient {
     case invalidUrlMock
     case decodingErrorMock
 }
-enum DataError: Error {
+enum DataError: LocalizedError {
     case invalidURL
     case networkError(Error)
     case decodingError
+    
+    var errorDescription: String? {
+        switch self {
+        case .invalidURL:
+            return "Invalid URL"
+        case .networkError(let error):
+            return error.localizedDescription
+        case .decodingError:
+            return "Decoding Error"
+        }
+    }
+    var recoverySuggestion: String? {
+        switch self {
+        case .invalidURL:
+            return "Retry later"
+        case .networkError:
+            return "Retry later"
+        case .decodingError:
+            return "Retry later"
+        }
+    }
+
 }
 
 protocol UpcomingRepository {
@@ -48,6 +70,7 @@ class SpaceNewsRepositoryDefault: UpcomingRepository, NewsRepository {
             return upcoming.results
         }
         catch {
+            print("Error fetching launches: \(error.localizedDescription)")
             throw error
         }
     }
@@ -61,6 +84,7 @@ class SpaceNewsRepositoryDefault: UpcomingRepository, NewsRepository {
             return upcoming.results
         }
         catch {
+            print("Error fetching launches: \(error.localizedDescription)")
             throw error
         }
     }
@@ -74,6 +98,7 @@ class SpaceNewsRepositoryDefault: UpcomingRepository, NewsRepository {
             return upcoming.results
         }
         catch {
+            print("Error fetching launches: \(error.localizedDescription)")
             throw error
         }
     }
@@ -82,6 +107,7 @@ class SpaceNewsRepositoryDefault: UpcomingRepository, NewsRepository {
             return try await searchArticle(with: nil)
         }
         catch {
+            print("Error fetching launches: \(error.localizedDescription)")
             throw error
         }
     }
@@ -96,6 +122,7 @@ class SpaceNewsRepositoryDefault: UpcomingRepository, NewsRepository {
             return upcoming.results
         }
         catch {
+            print("Error fetching launches: \(error.localizedDescription)")
             throw error
         }
     }

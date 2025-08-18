@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 extension UpcomingHomeView {
     @Observable
@@ -15,21 +16,22 @@ extension UpcomingHomeView {
         var launches: [LaunchDetails] = []
         var events: [EventDetails] = []
         var isLoading: Bool = true
-        var error: Error?
 
         init(repository: UpcomingRepository = SpaceNewsRepositoryDefault()) {
             self.repository = repository
         }
 
-        func onAppear() async {
+        func onAppear(viewError: Binding<Error?>) async {
             do {
+                isLoading = true
                 async let launchDetails = try await repository.fetchLaunches()
                 async let eventDetails = try await repository.fetchEvents()
                 launches = try await launchDetails
                 events = try await eventDetails
                 isLoading = false
             } catch {
-                self.error = error
+                isLoading = false
+                viewError.wrappedValue = error
             }
         }
     }
