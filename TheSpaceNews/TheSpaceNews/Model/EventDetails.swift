@@ -5,7 +5,7 @@
 //  Created by Pablo J. Bertola on 17/08/2025.
 //
 
-struct EventDetails: Decodable {
+struct EventDetails: Decodable, Hashable {
     let name: String
     let image: ImageArticle
     let date: String

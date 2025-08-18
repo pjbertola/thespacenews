@@ -5,7 +5,10 @@
 //  Created by Pablo J. Bertola on 15/08/2025.
 //
 
-struct LaunchDetails: Decodable {
+import Foundation
+
+struct LaunchDetails: Decodable, Hashable {
+//    var id = UUID()
     let name: String
     let image: ImageArticle
     let status: Status
@@ -13,16 +16,16 @@ struct LaunchDetails: Decodable {
     let mission: Mission
 }
 
-struct Mission: Decodable {
+struct Mission: Decodable, Hashable {
     let description: String
 }
 
-struct Status: Decodable {
+struct Status: Decodable, Hashable {
     let abbrev: String
     let name: String
 }
 
-struct ImageArticle: Decodable {
+struct ImageArticle: Decodable, Hashable {
     let name: String
     let imageUrl: String
     let thumbnailUrl: String
