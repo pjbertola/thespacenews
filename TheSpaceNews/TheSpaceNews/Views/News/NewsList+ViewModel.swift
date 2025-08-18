@@ -21,8 +21,9 @@ extension NewsListView {
             self.filter = filter
         }
 
-        func onAppear() async {
+        func refreshData() async {
             do {
+                isLoading = false
                 articles = try await repository.fetchArticle()
                 isLoading = false
             } catch {
@@ -35,6 +36,20 @@ extension NewsListView {
             } else {
                 return filter.filter(articles: articles, text: text)
             }
+        }
+        func loadMoreItemsIfNeeded(page: Int, currentItem item: Article) -> Int {
+            guard page < 10 else {
+                return page
+            }
+            return articles.last == item ? page + 1 : page
+        }
+        func loadMoreItems() async {
+            do {
+                try await articles.append(contentsOf: repository.fetchNextArticles())
+            } catch {
+                self.error = error
+            }
+            
         }
     }
     
