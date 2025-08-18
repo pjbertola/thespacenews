@@ -9,8 +9,12 @@
 import Foundation
 
 struct NewsEndpoint {
+    private let search: String
+    init(with search: String? = nil) {
+        self.search = search ?? String()
+    }
     private var path: String {
-        return "https://api.spaceflightnewsapi.net/v4/articles/?limit=50&ordering=-updated_at"
+        return "https://api.spaceflightnewsapi.net/v4/articles/?limit=50&ordering=-updated_at&search=\(search)"
     }
 
     var asURL: URL? {

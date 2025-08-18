@@ -11,10 +11,7 @@ struct NewsListView: View {
     var viewModel: ViewModel
     @State private var searchText: String = ""
     @State private var page: Int = 0
-
-    var filteredArticles: [Article] {
-        viewModel.filterNews(text: searchText)
-    }
+    @State private var callText: String = ""
 
     init(repository: NewsRepository = SpaceNewsRepositoryDefault()) {
         self.viewModel = ViewModel(repository: repository)
@@ -24,8 +21,20 @@ struct NewsListView: View {
             if viewModel.isLoading {
                 LoadingView()
             } else {
+                HStack {
+                    TextField("Search", text: $searchText)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                    Button (action: {
+                        callText = searchText
+                    }){
+                        Image(systemName: "magnifyingglass.circle")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                    }
+                }
+                .padding()
                 List {
-                    ForEach(filteredArticles, id: \.self) { article in
+                    ForEach(viewModel.articles, id: \.self) { article in
                         NavigationLink(value: article) {
                             NewsRowView(article: article)
                                 .onAppear {
@@ -35,14 +44,14 @@ struct NewsListView: View {
                         }
                     }
                 }
-                .navigationTitle("News Articles")
-                .searchable(text: $searchText)
+                .padding()
                 .navigationDestination(for: Article.self) { article in
                     WebView(urlString: article.url)
                 }
                 .refreshable {
                     await viewModel.refreshData()
                 }
+                .navigationTitle("News Articles")
             }
         }.task {
             await viewModel.refreshData()
@@ -51,6 +60,9 @@ struct NewsListView: View {
                 return
             }
             await viewModel.loadMoreItems()
+        }
+        .task(id: callText) {
+            await viewModel.searchNews(text: callText)
         }
     }
 }

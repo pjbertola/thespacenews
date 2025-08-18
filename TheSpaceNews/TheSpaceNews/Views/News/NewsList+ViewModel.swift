@@ -51,6 +51,19 @@ extension NewsListView {
             }
             
         }
+        func searchNews(text: String) async {
+            if text.isEmpty {
+                await refreshData()
+            } else {
+                do {
+                    isLoading = false
+                    articles = try await repository.searchArticle(with: text)
+                    isLoading = false
+                } catch {
+                    self.error = error
+                }
+            }
+        }
     }
     
 }

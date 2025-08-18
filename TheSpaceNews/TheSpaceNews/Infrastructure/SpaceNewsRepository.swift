@@ -27,6 +27,7 @@ protocol UpcomingRepository {
 protocol NewsRepository {
     func fetchArticle() async throws -> [Article]
     func fetchNextArticles() async throws -> [Article]
+    func searchArticle(with search: String?) async throws -> [Article]
 }
 
 class SpaceNewsRepositoryDefault: UpcomingRepository, NewsRepository {
@@ -63,15 +64,22 @@ class SpaceNewsRepositoryDefault: UpcomingRepository, NewsRepository {
             throw error
         }
     }
-
-    func fetchArticle() async throws -> [Article] {
-        guard let url = getNewsURL() else {
+    func searchArticle(with search: String?) async throws -> [Article] {
+        guard let url = getNewsURL(with: search) else {
             throw DataError.invalidURL
         }
         do {
             let upcoming: NewsArticles = try await fetchData(from: url)
             nextURL.updateNextURL(upcoming.next)
             return upcoming.results
+        }
+        catch {
+            throw error
+        }
+    }
+    func fetchArticle() async throws -> [Article] {
+        do {
+            return try await searchArticle(with: nil)
         }
         catch {
             throw error
@@ -118,10 +126,10 @@ private extension SpaceNewsRepositoryDefault {
             return NewsMockEndpoint(path: "newsDecodingError.json").asURL
         }
     }
-    func getNewsURL() -> URL? {
+    func getNewsURL(with search: String? = nil) -> URL? {
         switch apiClient {
         case .live:
-            return NewsEndpoint().asURL
+            return NewsEndpoint(with: search).asURL
         case .mock:
             return NewsMockEndpoint(path: "news.json").asURL
         case .invalidUrlMock:
