@@ -9,6 +9,11 @@ import SwiftUI
 
 struct NewsListView: View {
     var viewModel: ViewModel
+    @State private var searchText: String = ""
+    var filteredArticles: [Article] {
+        viewModel.filterNews(text: searchText)
+    }
+
     init(repository: NewsRepository = SpaceNewsRepositoryDefault()) {
         self.viewModel = ViewModel(repository: repository)
     }
@@ -18,13 +23,14 @@ struct NewsListView: View {
                 LoadingView()
             } else {
                 List {
-                    ForEach(viewModel.articles, id: \.self) { article in
+                    ForEach(filteredArticles, id: \.self) { article in
                         NavigationLink(value: article) {
                             NewsRowView(article: article)
                         }
                     }
                 }
                 .navigationTitle("News Articles")
+                .searchable(text: $searchText)
                 .navigationDestination(for: Article.self) { article in
                     WebView(urlString: article.url)
                 }

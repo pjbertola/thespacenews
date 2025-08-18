@@ -11,11 +11,14 @@ extension NewsListView {
     class ViewModel {
         var articles: [Article] = []
         var repository: NewsRepository
+        var filter: NewsFilter
         var isLoading: Bool = true
         var error: Error?
 
-        init(repository: NewsRepository = SpaceNewsRepositoryDefault()) {
+        init(repository: NewsRepository = SpaceNewsRepositoryDefault(),
+             filter: NewsFilter = NewsFilterDefault()) {
             self.repository = repository
+            self.filter = filter
         }
 
         func onAppear() async {
@@ -24,6 +27,13 @@ extension NewsListView {
                 isLoading = false
             } catch {
                 self.error = error
+            }
+        }
+        func filterNews(text: String) -> [Article] {
+            if text.isEmpty {
+                return articles
+            } else {
+                return filter.filter(articles: articles, text: text)
             }
         }
     }
