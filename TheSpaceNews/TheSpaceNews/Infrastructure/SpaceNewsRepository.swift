@@ -21,13 +21,15 @@ enum DataError: Error {
 
 protocol UpcomingRepository {
     func fetchLaunches() async throws -> [LaunchDetails]
-//    func fetchNextArticles() async throws -> [Article]
+    func fetchEvents() async throws -> [EventDetails]
 }
-//protocol NewsDetailsRepository {
-//    func fetchArticleDetails() async throws -> LaunchDetails
-//}
 
-class SpaceNewsRepositoryDefault: UpcomingRepository {
+protocol NewsRepository {
+    func fetchArticle() async throws -> [Article]
+    func fetchNextArticles() async throws -> [Article]
+}
+
+class SpaceNewsRepositoryDefault: UpcomingRepository, NewsRepository {
     private let apiClient: ServiceApiClient
     private var nextURL: NextURL
 
@@ -36,14 +38,12 @@ class SpaceNewsRepositoryDefault: UpcomingRepository {
         self.nextURL = NextURL(apiClient: apiClient)
     }
 
-
     func fetchLaunches() async throws -> [LaunchDetails] {
         guard let url = getLaunchURL() else {
             throw DataError.invalidURL
         }
         do {
             let upcoming: UpcomingLaunches = try await fetchData(from: url)
-//            nextURL.updateNextURL(upcoming.next)
             return upcoming.results
         }
         catch {
@@ -57,34 +57,35 @@ class SpaceNewsRepositoryDefault: UpcomingRepository {
         }
         do {
             let upcoming: UpcomingEvents = try await fetchData(from: url)
-//            nextURL.updateNextURL(upcoming.next)
             return upcoming.results
         }
         catch {
             throw error
         }
     }
-    
-//    func fetchNextArticles() async throws -> [Article] {
-//        guard let next = nextURL.getNextURL() else {
-//            return []
-//        }
-//        do {
-//            let upcoming: Upcoming =  try await fetchData(from: next)
-//            nextURL.updateNextURL(upcoming.next)
-//            return upcoming.results
-//        }
-//        catch {
-//            throw error
-//        }
-//    }
-    
-    func fetchArticleDetails(from url: URL?) async throws -> LaunchDetails {
-        guard let url = url else {
+
+    func fetchArticle() async throws -> [Article] {
+        guard let url = getNewsURL() else {
             throw DataError.invalidURL
         }
         do {
-            return try await fetchData(from: url)
+            let upcoming: NewsArticles = try await fetchData(from: url)
+            nextURL.updateNextURL(upcoming.next)
+            return upcoming.results
+        }
+        catch {
+            throw error
+        }
+    }
+
+    func fetchNextArticles() async throws -> [Article] {
+        guard let next = nextURL.getNextURL() else {
+            return []
+        }
+        do {
+            let upcoming: NewsArticles =  try await fetchData(from: next)
+            nextURL.updateNextURL(upcoming.next)
+            return upcoming.results
         }
         catch {
             throw error
@@ -111,6 +112,18 @@ private extension SpaceNewsRepositoryDefault {
             return EventEndpoint().asURL
         case .mock:
             return NewsMockEndpoint(path: "events.json").asURL
+        case .invalidUrlMock:
+            return nil
+        case .decodingErrorMock:
+            return NewsMockEndpoint(path: "newsDecodingError.json").asURL
+        }
+    }
+    func getNewsURL() -> URL? {
+        switch apiClient {
+        case .live:
+            return NewsEndpoint().asURL
+        case .mock:
+            return NewsMockEndpoint(path: "news.json").asURL
         case .invalidUrlMock:
             return nil
         case .decodingErrorMock:

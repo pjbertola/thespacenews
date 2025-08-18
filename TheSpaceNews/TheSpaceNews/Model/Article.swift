@@ -6,11 +6,17 @@
 //
 
 struct Article: Decodable {
-    let id: String
+    let title: String
     let url: String
-    let name: String
-    let status: Status
-    let net: String
-    let image: ImageArticle
+    let imageUrl: String
+    let summary: String
+
+    enum CodingKeys: String, CodingKey {
+        case title
+        case url
+        case imageUrl = "image_url"
+        case summary
+        
+    }
 }
 

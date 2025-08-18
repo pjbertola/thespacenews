@@ -80,5 +80,16 @@ class SpaceNewsRepositoryTests: XCTestCase {
             XCTFail("Expected DataError.decodingError but got \(error)")
         }
     }
+    func testFetchNewsAndNext() async {
+        // when
+        let articles = try! await repository.fetchArticle()
+        let articlesNext = try! await repository.fetchNextArticles()
+        let articlesNext2 = try! await repository.fetchNextArticles()
+        let allArticles = articles + articlesNext + articlesNext2
+        // then
+        XCTAssertTrue(articles.count == 3)
+        XCTAssertTrue(allArticles.count == 6)
+        XCTAssertTrue(articlesNext2.count == 0)
+    }
 
 }
