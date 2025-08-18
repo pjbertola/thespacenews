@@ -1,0 +1,184 @@
+{
+    "count": 25,
+    "next": "https://ll.thespacedevs.com/2.3.0/events/?date__gt=2025-08-17T00%3A00%3A00Z&limit=3&offset=3&ordering=date",
+    "previous": null,
+    "results": [
+        {
+            "id": 1230,
+            "url": "https://ll.thespacedevs.com/2.3.0/events/1230/",
+            "name": "SpaceX Crew-10 Post-Flight News Conference",
+            "info_urls": [
+                {
+                    "priority": 10,
+                    "source": "www.nasa.gov",
+                    "title": "’s SpaceX Crew-10 Astronauts to Discuss Science Mission",
+                    "description": "After spending almost five months in space, NASA’s SpaceX Crew-10 astronauts will discuss their science mission aboard the International Space Station during",
+                    "feature_image": null,
+                    "url": "https://www.nasa.gov/news-release/nasas-spacex-crew-10-astronauts-to-discuss-science-mission/",
+                    "type": {
+                        "id": 1,
+                        "name": "Official Page"
+                    },
+                    "language": {
+                        "id": 1,
+                        "name": "English",
+                        "code": "en"
+                    }
+                }
+            ],
+            "vid_urls": [],
+            "image": {
+                "id": 2348,
+                "name": "Crew-10 crew in Dragon",
+                "image_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/crew-10_crew_in_image_20250306075802.jpg",
+                "thumbnail_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/crew-10_crew_in_image_thumbnail_20250306075802.jpeg",
+                "credit": "SpaceX",
+                "license": {
+                    "id": 1,
+                    "name": "Unknown",
+                    "priority": 9,
+                    "link": null
+                },
+                "single_use": false,
+                "variants": []
+            },
+            "date": "2025-08-20T20:15:00Z",
+            "slug": "spacex-crew-10-post-flight-news-conference",
+            "type": {
+                "id": 20,
+                "name": "Press Event"
+            },
+            "description": "After spending almost five months in space, NASA’s SpaceX Crew-10 astronauts will discuss their science mission aboard the International Space Station during a news conference from the agency’s Johnson Space Center in Houston.\r\n\r\nNASA astronauts Anne McClain and Nichole Ayers, and JAXA (Japan Aerospace Exploration Agency) astronaut Takuya Onishi will answer questions about their mission. The crew returned to Earth on Aug. 9.",
+            "webcast_live": false,
+            "location": "Johnson Space Center, Houston",
+            "date_precision": {
+                "id": 1,
+                "name": "Minute",
+                "abbrev": "MIN",
+                "description": "The T-0 is accurate to the minute."
+            },
+            "response_mode": "normal",
+            "duration": null,
+            "updates": [
+                {
+                    "id": 11885,
+                    "profile_image": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/profile_images/arnaud2520muller_profile_20230607144351.jpg",
+                    "comment": "Adding event",
+                    "info_url": "https://www.nasa.gov/news-release/nasas-spacex-crew-10-astronauts-to-discuss-science-mission/",
+                    "created_by": "Nosu",
+                    "created_on": "2025-08-15T07:19:00Z"
+                }
+            ],
+            "last_updated": "2025-08-15T07:19:23Z"
+        },
+        {
+            "id": 1229,
+            "url": "https://ll.thespacedevs.com/2.3.0/events/1229/",
+            "name": "CRS-33 Dragon Docking",
+            "info_urls": [],
+            "vid_urls": [],
+            "image": {
+                "id": 1086,
+                "name": "Cargo Dragon docking",
+                "image_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/crs-28_dragon_d_image_20230530191602.jpeg",
+                "thumbnail_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/255bauto255d__image_thumbnail_20240305191606.jpeg",
+                "credit": "NASA",
+                "license": {
+                    "id": 4,
+                    "name": "NASA Image and Media Guidelines",
+                    "priority": 0,
+                    "link": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+                },
+                "single_use": false,
+                "variants": []
+            },
+            "date": "2025-08-22T12:22:48Z",
+            "slug": "crs-33-dragon-docking",
+            "type": {
+                "id": 2,
+                "name": "Docking"
+            },
+            "description": "Following its launch atop a Falcon 9, the CRS-33 Dragon will autonomously dock to the ISS, bringing crew supplies as well as experiments.",
+            "webcast_live": false,
+            "location": "International Space Station",
+            "date_precision": {
+                "id": 1,
+                "name": "Minute",
+                "abbrev": "MIN",
+                "description": "The T-0 is accurate to the minute."
+            },
+            "response_mode": "normal",
+            "duration": null,
+            "updates": [
+                {
+                    "id": 11841,
+                    "profile_image": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/profile_images/cosmic2520penguin_profile_20210817212020.png",
+                    "comment": "Added docking.",
+                    "info_url": "https://nasa-public-data.s3.amazonaws.com/iss-coords/current/ISS_OEM/ISS.OEM_J2K_EPH.txt",
+                    "created_by": "Cosmic_Penguin",
+                    "created_on": "2025-08-12T01:57:00Z"
+                }
+            ],
+            "last_updated": "2025-08-12T01:57:29Z"
+        },
+        {
+            "id": 1016,
+            "url": "https://ll.thespacedevs.com/2.3.0/events/1016/",
+            "name": "Juice Venus Flyby",
+            "info_urls": [
+                {
+                    "priority": 10,
+                    "source": "www.esa.int",
+                    "title": "ESA’s Juice lifts off on quest to discover secrets of Jupiter’s icy moons",
+                    "description": "ESA’s Jupiter Icy Moons Explorer (Juice) lifted off on an Ariane 5 rocket from Europe’s Spaceport in French Guiana at 14:14 CEST on 14 April. The successful launch marks the beginning of an ambitious voyage to uncover the secrets of the ocean worlds around giant planet Jupiter.",
+                    "feature_image": null,
+                    "url": "https://www.esa.int/Science_Exploration/Space_Science/Juice/ESA_s_Juice_lifts_off_on_quest_to_discover_secrets_of_Jupiter_s_icy_moons",
+                    "type": {
+                        "id": 1,
+                        "name": "Official Page"
+                    },
+                    "language": {
+                        "id": 1,
+                        "name": "English",
+                        "code": "en"
+                    }
+                }
+            ],
+            "vid_urls": [],
+            "image": {
+                "id": 1035,
+                "name": "JUICE render",
+                "image_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/255bauto255d__image_20240307192047.jpeg",
+                "thumbnail_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/255bauto255d__image_thumbnail_20240307192048.jpeg",
+                "credit": "spacecraft: ESA/ATG medialab; Jupiter: NASA/ESA/J. Nichols (University of Leicester); Ganymede: NASA/JPL; Io: NASA/JPL/University of Arizona; Callisto and Europa: NASA/JPL/DLR",
+                "license": {
+                    "id": 2,
+                    "name": "ESA Standard Licence",
+                    "priority": 2,
+                    "link": "https://www.esa.int/ESA_Multimedia/Terms_and_conditions_of_use_of_images_and_videos_available_on_the_esa_website"
+                },
+                "single_use": false,
+                "variants": []
+            },
+            "date": "2025-08-31T00:00:00Z",
+            "slug": "juice-venus-flyby",
+            "type": {
+                "id": 23,
+                "name": "Flyby"
+            },
+            "description": "Second flyby of ESA's Jupiter Icy Moons Explorer (Juice) mission on its way to the Jovian system.",
+            "webcast_live": false,
+            "location": "Venus",
+            "date_precision": {
+                "id": 7,
+                "name": "Month",
+                "abbrev": "M",
+                "description": "The T-0 is expected in the given month."
+            },
+            "response_mode": "normal",
+            "duration": null,
+            "updates": [],
+            "last_updated": "2024-07-15T09:33:06Z"
+        }
+    ]
+}

@@ -11,22 +11,6 @@ struct Article: Decodable {
     let name: String
     let status: Status
     let net: String
+    let image: ImageArticle
 }
 
-struct Status: Decodable {
-    let abbrev: String
-    let name: String
-}
-
-struct ImageArticle: Decodable {
-    let name: String
-    let imageUrl: String
-    let thumbnailUrl: String
-    
-    enum CodingKeys: String, CodingKey {
-        case name
-        case imageUrl = "image_url"
-        case thumbnailUrl = "thumbnail_url"
-    }
-}
-    

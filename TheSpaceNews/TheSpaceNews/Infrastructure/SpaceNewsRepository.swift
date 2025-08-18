@@ -19,15 +19,15 @@ enum DataError: Error {
     case decodingError
 }
 
-protocol NewsArticlesRepository {
-    func fetchArticles() async throws -> [Article]
-    func fetchNextArticles() async throws -> [Article]
+protocol UpcomingRepository {
+    func fetchLaunches() async throws -> [LaunchDetails]
+//    func fetchNextArticles() async throws -> [Article]
 }
-protocol NewsDetailsRepository {
-    func fetchArticleDetails() async throws -> ArticleDetails
-}
+//protocol NewsDetailsRepository {
+//    func fetchArticleDetails() async throws -> LaunchDetails
+//}
 
-class SpaceNewsRepositoryDefault: NewsArticlesRepository {
+class SpaceNewsRepositoryDefault: UpcomingRepository {
     private let apiClient: ServiceApiClient
     private var nextURL: NextURL
 
@@ -36,10 +36,67 @@ class SpaceNewsRepositoryDefault: NewsArticlesRepository {
         self.nextURL = NextURL(apiClient: apiClient)
     }
 
-    private func getURL() -> URL? {
+
+    func fetchLaunches() async throws -> [LaunchDetails] {
+        guard let url = getLaunchURL() else {
+            throw DataError.invalidURL
+        }
+        do {
+            let upcoming: UpcomingLaunches = try await fetchData(from: url)
+//            nextURL.updateNextURL(upcoming.next)
+            return upcoming.results
+        }
+        catch {
+            throw error
+        }
+    }
+
+    func fetchEvents() async throws -> [EventDetails] {
+        guard let url = getEventURL() else {
+            throw DataError.invalidURL
+        }
+        do {
+            let upcoming: UpcomingEvents = try await fetchData(from: url)
+//            nextURL.updateNextURL(upcoming.next)
+            return upcoming.results
+        }
+        catch {
+            throw error
+        }
+    }
+    
+//    func fetchNextArticles() async throws -> [Article] {
+//        guard let next = nextURL.getNextURL() else {
+//            return []
+//        }
+//        do {
+//            let upcoming: Upcoming =  try await fetchData(from: next)
+//            nextURL.updateNextURL(upcoming.next)
+//            return upcoming.results
+//        }
+//        catch {
+//            throw error
+//        }
+//    }
+    
+    func fetchArticleDetails(from url: URL?) async throws -> LaunchDetails {
+        guard let url = url else {
+            throw DataError.invalidURL
+        }
+        do {
+            return try await fetchData(from: url)
+        }
+        catch {
+            throw error
+        }
+    }
+}
+
+private extension SpaceNewsRepositoryDefault {
+    func getLaunchURL() -> URL? {
         switch apiClient {
         case .live:
-            return NewsEndpoint().asURL
+            return LaunchEndpoint().asURL
         case .mock:
             return NewsMockEndpoint().asURL
         case .invalidUrlMock:
@@ -48,7 +105,19 @@ class SpaceNewsRepositoryDefault: NewsArticlesRepository {
             return NewsMockEndpoint(path: "newsDecodingError.json").asURL
         }
     }
-    private func fetchData<T: Decodable>(from url: URL) async throws -> T {
+    func getEventURL() -> URL? {
+        switch apiClient {
+        case .live:
+            return EventEndpoint().asURL
+        case .mock:
+            return NewsMockEndpoint(path: "events.json").asURL
+        case .invalidUrlMock:
+            return nil
+        case .decodingErrorMock:
+            return NewsMockEndpoint(path: "newsDecodingError.json").asURL
+        }
+    }
+    func fetchData<T: Decodable>(from url: URL) async throws -> T {
         let urlRequest = URLRequest(url: url)
         var data: Data
         do {
@@ -64,73 +133,6 @@ class SpaceNewsRepositoryDefault: NewsArticlesRepository {
             throw DataError.decodingError
         }
 
-    }
-    func fetchArticles() async throws -> [Article] {
-        guard let url = getURL() else {
-            throw DataError.invalidURL
-        }
-        do {
-            let upcoming: Upcoming = try await fetchData(from: url)
-            nextURL.updateNextURL(upcoming.next)
-            return upcoming.results
-        }
-        catch {
-            throw error
-        }
-    }
-    
-    func fetchNextArticles() async throws -> [Article] {
-        guard let next = nextURL.getNextURL() else {
-            return []
-        }
-        do {
-            let upcoming: Upcoming =  try await fetchData(from: next)
-            nextURL.updateNextURL(upcoming.next)
-            return upcoming.results
-        }
-        catch {
-            throw error
-        }
-    }
-    
-    func fetchArticleDetails(from url: URL?) async throws -> ArticleDetails {
-        guard let url = url else {
-            throw DataError.invalidURL
-        }
-        do {
-            return try await fetchData(from: url)
-        }
-        catch {
-            throw error
-        }
-    }
-}
-
-struct NewsEndpoint {
-    private var path: String {
-        let now = Date().formatedISO8601()
-        let nextMonth = Date().addMonths(3).formatedISO8601()
-        return "https://lldev.thespacedevs.com/2.3.0/launches/upcoming/?ordering=net&limit=10&mode=list&net__gte=\(now)&net__lte=\(nextMonth)"
-    }
-
-    var asURL: URL? {
-        URL(string: path)
-    }
-}
-
-struct NewsMockEndpoint {
-    private let path: String
-
-    init(path: String = "news.json") {
-        self.path = path
-    }
-
-    var asURL: URL? {
-        guard let file = Bundle.main.url(forResource: path, withExtension: nil)
-        else {
-            fatalError("Couldn't find \(path) in main bundle.")
-        }
-        return file
     }
 }
 

@@ -1,6 +1,6 @@
 {
     "count": 327,
-    "next": null,
+    "next": "https://lldev.thespacedevs.com/2.3.0/launches/upcoming/?limit=3&mode=detailed&net__gte=2025-08-17T00%3A00%3A00Z&offset=3&ordering=net",
     "previous": null,
     "results": [
         {
