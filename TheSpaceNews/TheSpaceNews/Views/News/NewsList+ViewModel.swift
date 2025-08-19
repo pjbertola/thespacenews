@@ -10,8 +10,9 @@ import SwiftUI
 extension NewsListView {
     @Observable
     class ViewModel {
+        private let coordinator: Coordinator = Coordinator()
+        private let repository: NewsRepository
         var articles: [Article] = []
-        var repository: NewsRepository
         var filter: NewsFilter
         var isLoading: Bool = true
 
@@ -61,6 +62,9 @@ extension NewsListView {
                 isLoading = false
                 viewError.wrappedValue = error
             }
+        }
+        func getDestination(data: NavigationData) -> some View {
+            coordinator.getDestination(data: data)
         }
     }
 }

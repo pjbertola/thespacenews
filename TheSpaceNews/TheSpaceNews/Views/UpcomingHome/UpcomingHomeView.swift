@@ -58,7 +58,9 @@ struct UpcomingHomeView: View {
                 .navigationDestination(for: EventDetails.self) { eventDetails in viewModel.getDestination(data: eventDetails)
                 }
                 .refreshable {
-                    await viewModel.onRefresh(viewError: $error)
+                    Task {
+                        await viewModel.onRefresh(viewError: $error)
+                    }
                 }
                 .errorAlert(error: $error) {
                     Task {

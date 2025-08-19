@@ -120,7 +120,7 @@ class SpaceNewsRepositoryDefault: UpcomingRepository, NewsRepository {
             return upcoming.results
         }
         catch {
-            print("Error fetching launches: \(error.localizedDescription)")
+            print("Error fetching articles: \(error.localizedDescription)")
             throw error
         }
     }

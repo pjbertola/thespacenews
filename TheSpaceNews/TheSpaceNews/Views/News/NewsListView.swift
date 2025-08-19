@@ -13,7 +13,7 @@ struct NewsListView: View {
     @State private var page: Int = 0
     @State private var callText: String = ""
     @State private var error: Error?
-    
+
     init(repository: NewsRepository = SpaceNewsRepositoryDefault()) {
         self.viewModel = ViewModel(repository: repository)
     }
@@ -46,16 +46,20 @@ struct NewsListView: View {
                                         page = viewModel.loadMoreItemsIfNeeded(page: page, currentItem: article)
                                         
                                     }
+                                    .accessibilityIdentifier("NewsRowView")
                             }
                         }
                     }
                 }
+                .accessibilityIdentifier("ListNews")
                 .padding()
                 .navigationDestination(for: Article.self) { article in
-                    WebView(urlString: article.url)
+                    viewModel.getDestination(data: article)
                 }
                 .refreshable {
-                    await viewModel.refreshData(viewError: $error)
+                    Task {
+                        await viewModel.refreshData(viewError: $error)
+                    }
                 }
                 .navigationTitle("News Articles")
                 .errorAlert(error: $error) {
