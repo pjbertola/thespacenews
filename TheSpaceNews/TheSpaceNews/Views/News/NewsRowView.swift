@@ -11,12 +11,9 @@ struct NewsRowView: View {
     var article: Article
     var body: some View {
         HStack {
-            AsyncImage(url: URL(string:article.imageUrl)) { image in
-                image.resizable()
-            } placeholder: {
-                ProgressView()
-            }
-            .frame(width: 100, height: 100)
+            CachedAsyncImage(url: URL(string:article.imageUrl))
+                .frame(width: 100, height: 100)
+
             Text(article.title)
                 .bold()
         }

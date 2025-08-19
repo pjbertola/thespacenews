@@ -16,11 +16,7 @@ struct EventCard: View {
         self.viewModel = ViewModel(details: eventDetails)
     }
     var body: some View {
-        AsyncImage(url: viewModel.imageUrl) { image in
-            image.resizable()
-        } placeholder: {
-            ProgressView()
-        }
+        CachedAsyncImage(url: viewModel.imageUrl)
         .overlay {
             TextOverlay(viewModel: viewModel)
         }

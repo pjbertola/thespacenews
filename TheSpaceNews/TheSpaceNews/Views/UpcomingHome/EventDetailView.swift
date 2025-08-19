@@ -13,11 +13,7 @@ struct EventDetailView: View {
     var body: some View {
         ScrollView {
             VStack {
-                AsyncImage(url: URL(string: eventDetails.image.imageUrl)) { image in
-                    image.resizable()
-                } placeholder: {
-                    ProgressView()
-                }
+                CachedAsyncImage(url: URL(string: eventDetails.image.imageUrl))
                 .aspectRatio(3 / 2, contentMode: .fit)
                 Text(eventDetails.name)
                     .font(.title)

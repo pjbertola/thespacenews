@@ -12,11 +12,7 @@ struct LaunchDetailView: View {
     var body: some View {
         ScrollView {
             VStack {
-                AsyncImage(url: URL(string: launchDetails.image.imageUrl)) { image in
-                    image.resizable()
-                } placeholder: {
-                    ProgressView()
-                }
+                CachedAsyncImage(url: URL(string: launchDetails.image.imageUrl))
                 .aspectRatio(3 / 2, contentMode: .fit)
                 .overlay(alignment: .topTrailing) {
                     Text(launchDetails.status.name)
