@@ -52,9 +52,10 @@ struct UpcomingHomeView: View {
                 }
                 .listStyle(.inset)
                 .navigationTitle("Upcoming")
-                .navigationDestination(for: LaunchDetails.self) { launchDetails in LaunchDetailView(launchDetails: launchDetails)
+                .navigationDestination(for: LaunchDetails.self) { launchDetails in
+                    viewModel.getDestination(data: launchDetails)
                 }
-                .navigationDestination(for: EventDetails.self) { eventDetails in EventDetailView(eventDetails: eventDetails)
+                .navigationDestination(for: EventDetails.self) { eventDetails in viewModel.getDestination(data: eventDetails)
                 }
                 .refreshable {
                     await viewModel.onRefresh(viewError: $error)

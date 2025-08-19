@@ -7,8 +7,7 @@
 
 import Foundation
 
-struct LaunchDetails: Decodable, Hashable {
-//    var id = UUID()
+struct LaunchDetails: Decodable, Hashable, NavigationData {
     let name: String
     let image: ImageArticle
     let status: Status
