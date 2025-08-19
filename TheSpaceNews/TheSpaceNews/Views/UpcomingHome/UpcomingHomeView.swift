@@ -26,22 +26,26 @@ struct UpcomingHomeView: View {
                         ForEach(viewModel.launches, id: \.self) { launch in
                             NavigationLink(value: launch) {
                                 LaunchCard(launchDetails: launch)
+                                    .accessibilityIdentifier(launch.name)
                             }
                         }
                     }
+                    .accessibilityIdentifier("TabViewLaunches")
                     .tabViewStyle(.page)
                     .aspectRatio(3 / 2, contentMode: .fit)
                     .listRowInsets(EdgeInsets())
-                    
+
                     Text("Events")
                         .font(.headline)
                     TabView {
                         ForEach(viewModel.events, id: \.self) { event in
                             NavigationLink(value: event) {
                                 EventCard(eventDetails: event)
+                                    .accessibilityIdentifier(event.name)
                             }
                         }
                     }
+                    .accessibilityIdentifier("TabViewEvents")
                     .tabViewStyle(.page)
                     .aspectRatio(3 / 2, contentMode: .fit)
                     .listRowInsets(EdgeInsets())

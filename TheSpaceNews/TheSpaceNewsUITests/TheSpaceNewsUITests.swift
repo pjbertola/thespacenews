@@ -23,21 +23,72 @@ final class TheSpaceNewsUITests: XCTestCase {
     }
 
     @MainActor
-    func testExample() throws {
-        // UI tests must launch the application that they test.
+    func testUpcommingLaunchesSwipeAndTapAndBack() {
         let app = XCUIApplication()
+        app.launchEnvironment["MyUITestsCustomView"] = "true"
         app.launch()
-
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    @MainActor
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
+        
+        let collectionViews = app.collectionViews
+        guard collectionViews["TabViewLaunches"].waitForExistence(timeout: 10) else {
+                XCTFail()
+                return
         }
+
+        let cvLaunches = app.collectionViews["TabViewLaunches"]
+        print(cvLaunches.debugDescription)
+
+        collectionViews.collectionViews["TabViewLaunches"].buttons["Long March 4C | Shiyan 28 B-02-Long March 4C | Shiyan 28 B-02-Long March 4C | Shiyan 28 B-02"].swipeLeft()
+        collectionViews.collectionViews["TabViewLaunches"].buttons["Long March 6A | SatNet LEO Group 09-Long March 6A | SatNet LEO Group 09-Long March 6A | SatNet LEO Group 09"].swipeLeft()
+        
+        let thirdButton = collectionViews.collectionViews["TabViewLaunches"].buttons["Falcon 9 Block 5 | Starlink Group 17-5-Falcon 9 Block 5 | Starlink Group 17-5-Falcon 9 Block 5 | Starlink Group 17-5"]
+        thirdButton.tap()
+        let thirdTitle = app.scrollViews.otherElements.staticTexts["Falcon 9 Block 5 | Starlink Group 17-5"]
+        guard thirdTitle.waitForExistence(timeout: 10) else {
+                XCTFail()
+                return
+        }
+        XCTAssertTrue(true, "The title should be visible")
+        
+        let upcomingButton = app.navigationBars["_TtGC7SwiftUI32NavigationStackHosting"].buttons["Upcoming"]
+        upcomingButton.tap()
+        guard collectionViews["TabViewLaunches"].waitForExistence(timeout: 10) else {
+                XCTFail()
+                return
+        }
+        XCTAssertTrue(true, "TabViewLaunches should be visible")
+    }
+    @MainActor
+    func testUpcommingEventsSwipeAndTapAndBack() {
+        let app = XCUIApplication()
+        app.launchEnvironment["MyUITestsCustomView"] = "true"
+        app.launch()
+        
+        let collectionViews = app.collectionViews
+        guard collectionViews["TabViewEvents"].waitForExistence(timeout: 10) else {
+                XCTFail()
+                return
+        }
+
+        let cvEvents = app.collectionViews["TabViewEvents"]
+        print(cvEvents.debugDescription)
+
+        collectionViews.collectionViews["TabViewEvents"].buttons["SpaceX Crew-10 Post-Flight News Conference-SpaceX Crew-10 Post-Flight News Conference"].swipeLeft()
+        collectionViews.collectionViews["TabViewEvents"].buttons["CRS-33 Dragon Docking-CRS-33 Dragon Docking"].swipeLeft()
+        collectionViews.collectionViews["TabViewEvents"].buttons["Juice Venus Flyby-Juice Venus Flyby"].tap()
+
+        let thirdTitle = app.scrollViews.otherElements.staticTexts["Juice Venus Flyby"]
+        guard thirdTitle.waitForExistence(timeout: 10) else {
+                XCTFail()
+                return
+        }
+        XCTAssertTrue(true, "The title should be visible")
+        
+        let upcomingButton = app.navigationBars["_TtGC7SwiftUI32NavigationStackHosting"].buttons["Upcoming"]
+        upcomingButton.tap()
+        guard collectionViews["TabViewEvents"].waitForExistence(timeout: 10) else {
+                XCTFail()
+                return
+        }
+        XCTAssertTrue(true, "TabViewEvents should be visible")
     }
 }
