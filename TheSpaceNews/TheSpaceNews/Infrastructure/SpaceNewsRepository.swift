@@ -16,14 +16,17 @@ enum ServiceApiClient {
 enum DataError: LocalizedError {
     case invalidURL
     case networkError(Error)
+    case networkErrorDetail(String)
     case decodingError
     
     var errorDescription: String? {
         switch self {
         case .invalidURL:
             return "Invalid URL"
-        case .networkError(let error):
-            return "NetworkError: \(error.localizedDescription)"
+        case .networkError:
+            return "Network Error"
+        case .networkErrorDetail:
+            return "Network Error"
         case .decodingError:
             return "Decoding Error"
         }
@@ -31,11 +34,13 @@ enum DataError: LocalizedError {
     var recoverySuggestion: String? {
         switch self {
         case .invalidURL:
-            return "Retry later"
-        case .networkError:
-            return "Retry later"
+            return "It seems that the URL is not valid. Please check the URL and try again."
+        case .networkError(let error):
+            return error.localizedDescription
+        case .networkErrorDetail(let detail):
+            return "\(detail)"
         case .decodingError:
-            return "Retry later"
+            return "The data received from the server could not be decoded. Please try again later."
         }
     }
 
@@ -195,7 +200,16 @@ private extension SpaceNewsRepositoryDefault {
             let responseData = try decoder.decode(T.self, from: data)
             return responseData
         } catch {
-            throw DataError.decodingError
+            do {
+                let responseData = try decoder.decode(NetworkErrorDetail.self, from: data)
+                throw DataError.networkErrorDetail(responseData.detail)
+            } catch {
+                if error is DataError {
+                    throw error
+                } else {
+                    throw DataError.decodingError
+                }
+            }
         }
 
     }

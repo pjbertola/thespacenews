@@ -8,7 +8,7 @@
 import SwiftUI
 
 extension View {
-    func errorAlert(error: Binding<Error?>, buttonTitle: String = "OK", completion: @escaping () -> Void) -> some View {
+    func errorAlert(error: Binding<Error?>, buttonTitle: String = "Retry", completion: @escaping () -> Void) -> some View {
         let localizedAlertError = LocalizedAlertError(error: error.wrappedValue)
         return alert(isPresented: .constant(localizedAlertError != nil), error: localizedAlertError) { _ in
             Button(buttonTitle) {
