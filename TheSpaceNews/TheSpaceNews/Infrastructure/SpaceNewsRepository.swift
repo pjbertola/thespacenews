@@ -7,11 +7,13 @@
 
 import Foundation
 
-enum ServiceApiClient {
+enum ServiceApiClient: String {
     case live
     case mock
+    case mockEmpty
     case invalidUrlMock
     case decodingErrorMock
+    case networkErrorDetail
 }
 enum DataError: LocalizedError {
     case invalidURL
@@ -155,24 +157,28 @@ private extension SpaceNewsRepositoryDefault {
         switch apiClient {
         case .live:
             return LaunchEndpoint().asURL
-        case .mock:
+        case .mock, .mockEmpty:
             return NewsMockEndpoint().asURL
         case .invalidUrlMock:
             return nil
         case .decodingErrorMock:
             return NewsMockEndpoint(path: "newsDecodingError.json").asURL
+        case .networkErrorDetail:
+            return NewsMockEndpoint(path: "networkError.json").asURL
         }
     }
     func getEventURL() -> URL? {
         switch apiClient {
         case .live:
             return EventEndpoint().asURL
-        case .mock:
+        case .mock, .mockEmpty:
             return NewsMockEndpoint(path: "events.json").asURL
         case .invalidUrlMock:
             return nil
         case .decodingErrorMock:
             return NewsMockEndpoint(path: "newsDecodingError.json").asURL
+        case .networkErrorDetail:
+            return NewsMockEndpoint(path: "networkError.json").asURL
         }
     }
     func getNewsURL(with search: String? = nil) -> URL? {
@@ -181,10 +187,14 @@ private extension SpaceNewsRepositoryDefault {
             return NewsEndpoint(with: search).asURL
         case .mock:
             return NewsMockEndpoint(path: "news.json").asURL
+        case .mockEmpty:
+            return NewsMockEndpoint(path: "newsEmpty.json").asURL
         case .invalidUrlMock:
             return nil
         case .decodingErrorMock:
             return NewsMockEndpoint(path: "newsDecodingError.json").asURL
+        case .networkErrorDetail:
+            return NewsMockEndpoint(path: "networkError.json").asURL
         }
     }
     func fetchData<T: Decodable>(from url: URL) async throws -> T {
@@ -240,6 +250,10 @@ fileprivate struct NextURL {
             return nil
         case .decodingErrorMock:
             return NewsMockEndpoint(path: "newsDecodingError.json").asURL
+        case .networkErrorDetail:
+            return NewsMockEndpoint(path: "networkError.json").asURL
+        case .mockEmpty:
+            return NewsMockEndpoint(path: "newsEmpty.json").asURL
         }
     }
 }

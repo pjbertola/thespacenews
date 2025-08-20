@@ -9,6 +9,10 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var selection: Tab = .upcoming
+    private var upcomingApiClient: ServiceApiClient = {
+        .live
+    }()
+    private var newsApiClient: ServiceApiClient = .live
     
     enum Tab {
         case upcoming
@@ -18,30 +22,17 @@ struct ContentView: View {
     var body: some View {
         TabView(selection: $selection) {
             // Check if the app is running in a custom UI test environment
-            if ProcessInfo().isCustomUITestedView {
-                UpcomingHomeView(repository: SpaceNewsRepositoryDefault(apiClient: .mock))
-                    .tabItem {
-                        Label("Upcoming", systemImage: "star")
-                    }
-                    .tag(Tab.upcoming)
-                
-                NewsListView(repository: SpaceNewsRepositoryDefault(apiClient: .mock))
-                    .tabItem {
-                        Label("List", systemImage: "list.bullet")
-                    }
-                    .tag(Tab.list)
-            } else {
-                UpcomingHomeView()
-                    .tabItem {
-                        Label("Upcoming", systemImage: "star")
-                    }
-                    .tag(Tab.upcoming)
-                NewsListView()
-                    .tabItem {
-                        Label("List", systemImage: "list.bullet")
-                    }
-                    .tag(Tab.list)
-            }
+            UpcomingHomeView(repository: SpaceNewsRepositoryDefault(apiClient: ProcessInfo().customUITestedUpcoming))
+                .tabItem {
+                    Label("Upcoming", systemImage: "star")
+                }
+                .tag(Tab.upcoming)
+            
+            NewsListView(repository: SpaceNewsRepositoryDefault(apiClient: ProcessInfo().customUITestedNews))
+                .tabItem {
+                    Label("List", systemImage: "list.bullet")
+                }
+                .tag(Tab.list)
         }
     }
 }
@@ -52,7 +43,20 @@ struct ContentView: View {
 
 //  Check if the app is running in a custom UI test environment
 extension ProcessInfo {
-    var isCustomUITestedView: Bool {
-        return environment["MyUITestsCustomView"] == "true"
+    var customUITestedUpcoming: ServiceApiClient {
+        return getCustomUITestedApi(raw: environment["customUITestedUpcoming"])
+    }
+    var customUITestedNews: ServiceApiClient {
+        return getCustomUITestedApi(raw: environment["customUITestedNews"])
+    }
+    private func getCustomUITestedApi(raw: String?) -> ServiceApiClient {
+        guard let raw = raw else {
+            return .live
+        }
+        if let serviceApi = ServiceApiClient(rawValue: raw) {
+            return serviceApi
+        } else {
+            return .live
+        }
     }
 }

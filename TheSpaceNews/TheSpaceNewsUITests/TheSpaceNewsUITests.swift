@@ -25,7 +25,9 @@ final class TheSpaceNewsUITests: XCTestCase {
     @MainActor
     func testUpcommingLaunchesSwipeAndTapAndBack() {
         let app = XCUIApplication()
-        app.launchEnvironment["MyUITestsCustomView"] = "true"
+
+        app.launchEnvironment["customUITestedUpcoming"] = "mock"
+        app.launchEnvironment["customUITestedNews"] = "mock"
         app.launch()
         
         let collectionViews = app.collectionViews
@@ -37,30 +39,27 @@ final class TheSpaceNewsUITests: XCTestCase {
         let cvLaunches = app.collectionViews["TabViewLaunches"]
         print(cvLaunches.debugDescription)
 
-        collectionViews.collectionViews["TabViewLaunches"].buttons["Long March 4C | Shiyan 28 B-02-Long March 4C | Shiyan 28 B-02-Long March 4C | Shiyan 28 B-02"].swipeLeft()
-        collectionViews.collectionViews["TabViewLaunches"].buttons["Long March 6A | SatNet LEO Group 09-Long March 6A | SatNet LEO Group 09-Long March 6A | SatNet LEO Group 09"].swipeLeft()
+        app.images["Long March 4C | Shiyan 28 B-02"].swipeLeft()
+        app.images["Long March 6A | SatNet LEO Group 09"].swipeLeft()
         
-        let thirdButton = collectionViews.collectionViews["TabViewLaunches"].buttons["Falcon 9 Block 5 | Starlink Group 17-5-Falcon 9 Block 5 | Starlink Group 17-5-Falcon 9 Block 5 | Starlink Group 17-5"]
+        let thirdButton = app.images["Falcon 9 Block 5 | Starlink Group 17-5"]
         thirdButton.tap()
         let thirdTitle = app.scrollViews.otherElements.staticTexts["Falcon 9 Block 5 | Starlink Group 17-5"]
         guard thirdTitle.waitForExistence(timeout: 10) else {
                 XCTFail()
                 return
         }
-        XCTAssertTrue(true, "The title should be visible")
-        
-        let upcomingButton = app.navigationBars["_TtGC7SwiftUI32NavigationStackHosting"].buttons["Upcoming"]
-        upcomingButton.tap()
+        app.navigationBars.buttons["Upcoming"].tap()
         guard collectionViews["TabViewLaunches"].waitForExistence(timeout: 10) else {
                 XCTFail()
                 return
         }
-        XCTAssertTrue(true, "TabViewLaunches should be visible")
     }
     @MainActor
     func testUpcommingEventsSwipeAndTapAndBack() {
         let app = XCUIApplication()
-        app.launchEnvironment["MyUITestsCustomView"] = "true"
+        app.launchEnvironment["customUITestedUpcoming"] = "mock"
+        app.launchEnvironment["customUITestedNews"] = "mock"
         app.launch()
         
         let collectionViews = app.collectionViews
@@ -71,24 +70,155 @@ final class TheSpaceNewsUITests: XCTestCase {
 
         let cvEvents = app.collectionViews["TabViewEvents"]
         print(cvEvents.debugDescription)
-
-        collectionViews.collectionViews["TabViewEvents"].buttons["SpaceX Crew-10 Post-Flight News Conference-SpaceX Crew-10 Post-Flight News Conference"].swipeLeft()
-        collectionViews.collectionViews["TabViewEvents"].buttons["CRS-33 Dragon Docking-CRS-33 Dragon Docking"].swipeLeft()
-        collectionViews.collectionViews["TabViewEvents"].buttons["Juice Venus Flyby-Juice Venus Flyby"].tap()
+        app.images["Long March 4C | Shiyan 28 B-02"].swipeLeft()
+        
+        app.images["SpaceX Crew-10 Post-Flight News Conference"].swipeLeft()
+        app.images["CRS-33 Dragon Docking"].swipeLeft()
+        app.images["Juice Venus Flyby"].tap()
 
         let thirdTitle = app.scrollViews.otherElements.staticTexts["Juice Venus Flyby"]
         guard thirdTitle.waitForExistence(timeout: 10) else {
                 XCTFail()
                 return
         }
-        XCTAssertTrue(true, "The title should be visible")
         
-        let upcomingButton = app.navigationBars["_TtGC7SwiftUI32NavigationStackHosting"].buttons["Upcoming"]
-        upcomingButton.tap()
+        app.navigationBars.buttons["Upcoming"].tap()
         guard collectionViews["TabViewEvents"].waitForExistence(timeout: 10) else {
                 XCTFail()
                 return
         }
-        XCTAssertTrue(true, "TabViewEvents should be visible")
     }
+    @MainActor
+    func testNewsListGoToWebAndReturnUI() {
+        let app = XCUIApplication()
+        app.launchEnvironment["customUITestedUpcoming"] = "mock"
+        app.launchEnvironment["customUITestedNews"] = "mock"
+        app.activate()
+        
+        guard app.buttons["List"].waitForExistence(timeout: 10) else {
+                XCTFail()
+                return
+        }
+        app.buttons["List"].tap()
+        guard app.collectionViews["ListNews"].waitForExistence(timeout: 10) else {
+                XCTFail()
+                return
+        }
+        let firtsRow = app.images.matching(identifier: "NewsRowView").element(boundBy: 0)
+        guard firtsRow.waitForExistence(timeout: 10) else {
+                XCTFail()
+                return
+        }
+        firtsRow.tap()
+
+        guard app.webViews["ArticleWebView"].waitForExistence(timeout: 10) else {
+                XCTFail()
+                return
+        }
+        app.buttons["News Articles"].tap()
+        guard app.collectionViews["ListNews"].waitForExistence(timeout: 10) else {
+                XCTFail()
+                return
+        }
+    }
+    @MainActor
+    func testUpcomingInvalidURL() {
+        let app = XCUIApplication()
+        app.launchEnvironment["customUITestedUpcoming"] = "invalidUrlMock"
+        app.launchEnvironment["customUITestedNews"] = "mock"
+        app.activate()
+        guard app.staticTexts["Invalid URL"].waitForExistence(timeout: 10) else {
+                XCTFail()
+                return
+        }
+    }
+    @MainActor
+    func testUpcomingDecodingError() {
+        let app = XCUIApplication()
+        app.launchEnvironment["customUITestedUpcoming"] = "decodingErrorMock"
+        app.launchEnvironment["customUITestedNews"] = "mock"
+        app.activate()
+        guard app.staticTexts["Decoding Error"].waitForExistence(timeout: 10) else {
+                XCTFail()
+                return
+        }
+
+    }
+    @MainActor
+    func testUpcomingNetworkError() {
+        let app = XCUIApplication()
+        app.launchEnvironment["customUITestedUpcoming"] = "networkErrorDetail"
+        app.launchEnvironment["customUITestedNews"] = "mock"
+        app.activate()
+        guard app.staticTexts["Request was throttled. Expected available in 2441 seconds."].waitForExistence(timeout: 10) else {
+                XCTFail()
+                return
+        }
+    }
+    @MainActor
+    func testNewsInvalidURL() {
+        let app = XCUIApplication()
+        app.launchEnvironment["customUITestedUpcoming"] = "mock"
+        app.launchEnvironment["customUITestedNews"] = "invalidUrlMock"
+        app.activate()
+        guard app.buttons["List"].waitForExistence(timeout: 10) else {
+                XCTFail()
+                return
+        }
+        app.buttons["List"].tap()
+        guard app.staticTexts["Invalid URL"].waitForExistence(timeout: 10) else {
+                XCTFail()
+                return
+        }
+    }
+    @MainActor
+    func testNewsDecodingError() {
+        let app = XCUIApplication()
+        app.launchEnvironment["customUITestedUpcoming"] = "mock"
+        app.launchEnvironment["customUITestedNews"] = "decodingErrorMock"
+        app.activate()
+        guard app.buttons["List"].waitForExistence(timeout: 10) else {
+                XCTFail()
+                return
+        }
+        app.buttons["List"].tap()
+        guard app.staticTexts["Decoding Error"].waitForExistence(timeout: 10) else {
+                XCTFail()
+                return
+        }
+
+    }
+    @MainActor
+    func testNewsNetworkError() {
+        let app = XCUIApplication()
+        app.launchEnvironment["customUITestedUpcoming"] = "mock"
+        app.launchEnvironment["customUITestedNews"] = "networkErrorDetail"
+        app.activate()
+        guard app.buttons["List"].waitForExistence(timeout: 10) else {
+                XCTFail()
+                return
+        }
+        app.buttons["List"].tap()
+        guard app.staticTexts["Request was throttled. Expected available in 2441 seconds."].waitForExistence(timeout: 10) else {
+                XCTFail()
+                return
+        }
+    }
+    @MainActor
+    func testNewsEmpty() {
+        let app = XCUIApplication()
+        app.launchEnvironment["customUITestedUpcoming"] = "mock"
+        app.launchEnvironment["customUITestedNews"] = "mockEmpty"
+        app.activate()
+        guard app.buttons["List"].waitForExistence(timeout: 10) else {
+                XCTFail()
+                return
+        }
+        app.buttons["List"].tap()
+        guard app.staticTexts["No results for \"\""].waitForExistence(timeout: 10) else {
+                XCTFail()
+                return
+        }
+    }
+
 }

@@ -12,6 +12,7 @@ extension NewsListView {
         func getDestination(data: NavigationData) -> some View {
             if let details = data as? Article {
                 WebView(urlString: details.url)
+                    .accessibilityIdentifier("ArticleWebView")
             }
         }
     }
