@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// The endpoint fetches up to 50 articles, ordered by the most recently updated, and applies the search filter if provided.
 struct NewsEndpoint {
     private let search: String
     init(with search: String? = nil) {

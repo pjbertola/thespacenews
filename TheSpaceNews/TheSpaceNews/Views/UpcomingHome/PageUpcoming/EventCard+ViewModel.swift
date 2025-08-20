@@ -9,14 +9,18 @@ import Foundation
 import Combine
 
 extension EventCard {
+    /// ViewModel for the EventCard view, providing event details and a live countdown.
     @Observable
     class ViewModel {
         private let details: EventDetails
         let name: String
         var dateCounter: String = ""
         let imageUrl: URL?
+        /// Timer publisher for updating the countdown.
         private var timer: AnyCancellable?
 
+        /// Initializes the ViewModel with event details and sets up the countdown timer.
+        /// - Parameter details: The details of the event.
         init(details: EventDetails) {
             self.details = details
             self.name = details.name
@@ -24,6 +28,7 @@ extension EventCard {
             setUpTimer()
         }
 
+        /// Sets up a timer that updates the countdown every second until the event time.
         private func setUpTimer() {
             guard let netDate = Date.fromFormattedISO8601(details.date) else { return }
             timer?.cancel()
@@ -44,6 +49,7 @@ extension EventCard {
                 }
         }
 
+        /// Cancels the timer when the ViewModel is deallocated.
         deinit {
             timer?.cancel()
         }

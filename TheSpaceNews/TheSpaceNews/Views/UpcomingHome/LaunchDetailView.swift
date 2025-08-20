@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// A view that displays detailed information about a specific launch.
 struct LaunchDetailView: View {
     @State var launchDetails: LaunchDetails
     var body: some View {
@@ -14,6 +15,7 @@ struct LaunchDetailView: View {
             VStack {
                 CachedAsyncImage(url: URL(string: launchDetails.image.imageUrl))
                 .aspectRatio(3 / 2, contentMode: .fit)
+                // Overlay showing the launch status in the top-right corner.
                 .overlay(alignment: .topTrailing) {
                     Text(launchDetails.status.name)
                         .padding(3)

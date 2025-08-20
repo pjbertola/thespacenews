@@ -6,6 +6,7 @@
 //
 import Foundation
 
+/// Returns the URL of the local JSON file in the main bundle.
 struct NewsMockEndpoint {
     private let path: String
 

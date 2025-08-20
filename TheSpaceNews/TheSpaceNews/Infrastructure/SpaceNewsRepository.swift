@@ -60,23 +60,38 @@ protocol NewsRepository {
     func searchArticle(with search: String?) async throws -> [Article]
 }
 
+/// Default implementation of repositories for fetching space news, launches, and events.
+/// Supports live and mock data sources, caching, and pagination.
 class SpaceNewsRepositoryDefault: UpcomingRepository, NewsRepository {
+    /// The API client type (live or various mock modes).
     private let apiClient: ServiceApiClient
+    /// The URL session used for network requests.
+    private let urlSession: URLSession
+    /// Helper for managing pagination URLs for news articles.
     private var nextURL: NextURL
+    /// Cached list of launch details.
     private var launches: [LaunchDetails] = []
+    /// Cached list of event details.
     private var events: [EventDetails] = []
 
-    init(apiClient: ServiceApiClient = .live) {
+    /// Initializes the repository with a specified API client and URL session.
+    /// - Parameters:
+    ///   - apiClient: The API client to use (defaults to `.live`).
+    ///   - urlSession: The URL session to use (defaults to `.shared`).
+    init(apiClient: ServiceApiClient = .live, urlSession: URLSession = .shared) {
         self.apiClient = apiClient
+        self.urlSession = urlSession
         self.nextURL = NextURL(apiClient: apiClient)
     }
 
+    /// Fetches upcoming launches, using cache if available.
+    /// - Returns: An array of `LaunchDetails`.
     func fetchLaunches() async throws -> [LaunchDetails] {
         if !launches.isEmpty {
             return launches
         }
         guard let url = getLaunchURL() else {
-            throw DataError.invalidURL
+            try logAndThrow("Invalid URL for launches", error: DataError.invalidURL)
         }
         do {
             let upcoming: UpcomingLaunches = try await fetchData(from: url)
@@ -84,17 +99,18 @@ class SpaceNewsRepositoryDefault: UpcomingRepository, NewsRepository {
             return upcoming.results
         }
         catch {
-            print("Error fetching launches: \(error.localizedDescription)")
-            throw error
+            try logAndThrow("Error fetching launches: \(error.localizedDescription)", error: error)
         }
     }
 
+    /// Fetches upcoming events, using cache if available.
+    /// - Returns: An array of `EventDetails`.
     func fetchEvents() async throws -> [EventDetails] {
         if !events.isEmpty {
             return events
         }
         guard let url = getEventURL() else {
-            throw DataError.invalidURL
+            try logAndThrow("Invalid URL for events", error: DataError.invalidURL)
         }
         do {
             let upcoming: UpcomingEvents = try await fetchData(from: url)
@@ -102,19 +118,22 @@ class SpaceNewsRepositoryDefault: UpcomingRepository, NewsRepository {
             return upcoming.results
         }
         catch {
-            print("Error fetching launches: \(error.localizedDescription)")
-            throw error
+            try logAndThrow("Error fetching events: \(error.localizedDescription)", error: error)
         }
     }
 
+    /// Clears cached launches and events.
     func clearCache() {
         launches = []
         events = []
     }
 
+    /// Searches for news articles with an optional search string.
+    /// - Parameter search: The search query.
+    /// - Returns: An array of `Article`.
     func searchArticle(with search: String?) async throws -> [Article] {
         guard let url = getNewsURL(with: search) else {
-            throw DataError.invalidURL
+            try logAndThrow("Invalid URL for news search", error: DataError.invalidURL)
         }
         do {
             let upcoming: NewsArticles = try await fetchData(from: url)
@@ -122,20 +141,23 @@ class SpaceNewsRepositoryDefault: UpcomingRepository, NewsRepository {
             return upcoming.results
         }
         catch {
-            print("Error fetching articles: \(error.localizedDescription)")
-            throw error
+            try logAndThrow("Error fetching articles: \(error.localizedDescription)", error: error)
         }
     }
+
+    /// Fetches the first page of news articles.
+    /// - Returns: An array of `Article`.
     func fetchArticle() async throws -> [Article] {
         do {
             return try await searchArticle(with: nil)
         }
         catch {
-            print("Error fetching launches: \(error.localizedDescription)")
-            throw error
+            try logAndThrow("Error fetching launches: \(error.localizedDescription)", error: error)
         }
     }
 
+    /// Fetches the next page of news articles using pagination.
+    /// - Returns: An array of `Article`, or an empty array if no next page.
     func fetchNextArticles() async throws -> [Article] {
         guard let next = nextURL.getNextURL() else {
             return []
@@ -146,8 +168,7 @@ class SpaceNewsRepositoryDefault: UpcomingRepository, NewsRepository {
             return upcoming.results
         }
         catch {
-            print("Error fetching launches: \(error.localizedDescription)")
-            throw error
+            try logAndThrow("Error fetching next articles: \(error.localizedDescription)", error: error)
         }
     }
 }
@@ -201,9 +222,9 @@ private extension SpaceNewsRepositoryDefault {
         let urlRequest = URLRequest(url: url)
         var data: Data
         do {
-            (data, _) = try await URLSession.shared.data(for: urlRequest)
+            (data, _) = try await urlSession.data(for: urlRequest)
         } catch {
-            throw DataError.networkError(error)
+            try logAndThrow("Network request failed", error: error)
         }
         let decoder = JSONDecoder()
         do {
@@ -212,20 +233,23 @@ private extension SpaceNewsRepositoryDefault {
         } catch {
             do {
                 let responseData = try decoder.decode(NetworkErrorDetail.self, from: data)
-                throw DataError.networkErrorDetail(responseData.detail)
+                try logAndThrow("Network error: \(responseData.detail)", error: DataError.networkErrorDetail(responseData.detail))
             } catch {
                 if error is DataError {
-                    throw error
+                    try logAndThrow("Data error", error: error)
                 } else {
-                    throw DataError.decodingError
+                    try logAndThrow("Decoding error", error: DataError.decodingError)
                 }
             }
         }
-
+    }
+    private func logAndThrow(_ message: String, error: Error) throws -> Never {
+        print("\(message): \(error.localizedDescription)")
+        throw error
     }
 }
 
-fileprivate struct NextURL {
+fileprivate class NextURL {
     private let apiClient: ServiceApiClient
     private var next: String?
 
@@ -233,7 +257,7 @@ fileprivate struct NextURL {
         self.apiClient = apiClient
     }
 
-    mutating func updateNextURL(_ url: String?) {
+    func updateNextURL(_ url: String?) {
         self.next = url
     }
 

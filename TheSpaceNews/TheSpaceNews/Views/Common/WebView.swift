@@ -9,33 +9,25 @@
 import SwiftUI
 import WebKit
 
+/// Wraps a WKWebView to display web content from a URL.
 struct WebView: UIViewRepresentable {
     let urlString: String
 
+    /// Creates and returns a WKWebView instance.
+    /// - Parameter context: The context for coordinating with UIKit.
     func makeUIView(context: Context) -> WKWebView {
         let webView = WKWebView()
-        // Optional: Set a coordinator as the navigation delegate
-        // webView.navigationDelegate = context.coordinator 
         return webView
     }
 
+    /// Updates the WKWebView with a new URL request if the URL is valid.
+    /// - Parameters:
+    ///   - uiView: The WKWebView instance to update.
+    ///   - context: The context for coordinating with UIKit.
     func updateUIView(_ uiView: WKWebView, context: Context) {
         if let url = URL(string: urlString) {
             let request = URLRequest(url: url)
             uiView.load(request)
         }
     }
-
-    // Optional: Implement makeCoordinator() and a Coordinator class
-    // func makeCoordinator() -> Coordinator {
-    //     Coordinator(self)
-    // }
-
-    // class Coordinator: NSObject, WKNavigationDelegate {
-    //     var parent: WebView
-    //     init(_ parent: WebView) {
-    //         self.parent = parent
-    //     }
-    //     // Implement delegate methods here
-    // }
 }

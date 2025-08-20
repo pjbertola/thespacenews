@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+/// A view that displays detailed information about a specific event.
 struct EventDetailView: View {
     @State var eventDetails: EventDetails
     var body: some View {

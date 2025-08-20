@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// A view that displays a single news article row with an image and title.
 struct NewsRowView: View {
     var article: Article
     var body: some View {

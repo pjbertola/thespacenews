@@ -21,6 +21,7 @@ struct ContentView: View {
     
     var body: some View {
         TabView(selection: $selection) {
+            #if DEBUG
             // Check if the app is running in a custom UI test environment
             UpcomingHomeView(repository: SpaceNewsRepositoryDefault(apiClient: ProcessInfo().customUITestedUpcoming))
                 .tabItem {
@@ -33,6 +34,19 @@ struct ContentView: View {
                     Label("List", systemImage: "list.bullet")
                 }
                 .tag(Tab.list)
+            #else
+            UpcomingHomeView()
+                .tabItem {
+                    Label("Upcoming", systemImage: "star")
+                }
+                .tag(Tab.upcoming)
+            
+            NewsListView()
+                .tabItem {
+                    Label("List", systemImage: "list.bullet")
+                }
+                .tag(Tab.list)
+            #endif
         }
     }
 }
@@ -41,6 +55,7 @@ struct ContentView: View {
     ContentView()
 }
 
+#if DEBUG
 //  Check if the app is running in a custom UI test environment
 extension ProcessInfo {
     var customUITestedUpcoming: ServiceApiClient {
@@ -60,3 +75,4 @@ extension ProcessInfo {
         }
     }
 }
+#endif

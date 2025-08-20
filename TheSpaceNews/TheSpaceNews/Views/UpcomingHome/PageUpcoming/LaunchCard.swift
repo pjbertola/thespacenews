@@ -8,9 +8,11 @@
 import Foundation
 import SwiftUI
 
+/// A card view displaying a launch image with overlayed launch information.
 struct LaunchCard: View {
     var viewModel: ViewModel
-
+    /// Initializes the card with launch details.
+    /// - Parameter launchDetails: The details of the launch to display.
     init(launchDetails: LaunchDetails) {
         self.viewModel = ViewModel(details: launchDetails)
     }
@@ -24,6 +26,7 @@ struct LaunchCard: View {
     }
 }
 extension LaunchCard {
+    /// An overlay view displaying launch status, name, and countdown on top of the image.
     struct TextOverlay: View {
         var viewModel: ViewModel
         

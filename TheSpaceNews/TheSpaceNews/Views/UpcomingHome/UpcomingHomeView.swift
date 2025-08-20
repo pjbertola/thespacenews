@@ -7,10 +7,16 @@
 
 import SwiftUI
 
+/// The main view displaying upcoming launches and events.
 struct UpcomingHomeView: View {
+    /// The view model managing launches, events, and loading state.
     var viewModel: ViewModel
+    
+    /// Holds any error that occurs during data loading.
     @State private var error: Error?
 
+    /// Initializes the view with a repository, defaulting to SpaceNewsRepositoryDefault.
+    /// - Parameter repository: The repository to fetch data from.
     init(repository: UpcomingRepository = SpaceNewsRepositoryDefault()) {
         self.viewModel = ViewModel(repository: repository)
     }
@@ -20,6 +26,7 @@ struct UpcomingHomeView: View {
                 LoadingView()
             } else {
                 List {
+                    // Section for upcoming launches.
                     Text("Lunches")
                         .font(.headline)
                     TabView {
@@ -35,6 +42,7 @@ struct UpcomingHomeView: View {
                     .aspectRatio(3 / 2, contentMode: .fit)
                     .listRowInsets(EdgeInsets())
 
+                    // Section for upcoming events.
                     Text("Events")
                         .font(.headline)
                     TabView {
@@ -53,15 +61,20 @@ struct UpcomingHomeView: View {
                 .listStyle(.inset)
                 .navigationTitle("Upcoming")
                 .navigationDestination(for: LaunchDetails.self) { launchDetails in
+                    // Navigation destination for launch details.
                     viewModel.getDestination(data: launchDetails)
                 }
-                .navigationDestination(for: EventDetails.self) { eventDetails in viewModel.getDestination(data: eventDetails)
+                .navigationDestination(for: EventDetails.self) { eventDetails in
+                    // Navigation destination for event details.
+                    viewModel.getDestination(data: eventDetails)
                 }
                 .refreshable {
+                    // Pull-to-refresh functionality.
                     Task {
                         await viewModel.onRefresh(viewError: $error)
                     }
                 }
+                // Error alert handling.
                 .errorAlert(error: $error) {
                     Task {
                         await viewModel.onAppear(viewError: $error)
@@ -69,6 +82,7 @@ struct UpcomingHomeView: View {
                 }
             }
         }
+        // Load data when the view appears.
         .task {
             await viewModel.onAppear(viewError: $error)
         }

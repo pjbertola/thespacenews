@@ -9,9 +9,12 @@
 import Foundation
 import SwiftUI
 
+/// A card view displaying an event image with overlayed event information.
 struct EventCard: View {
     var viewModel: ViewModel
 
+    /// Initializes the card with event details.
+    /// - Parameter eventDetails: The details of the event to display.
     init(eventDetails: EventDetails) {
         self.viewModel = ViewModel(details: eventDetails)
     }
@@ -23,6 +26,7 @@ struct EventCard: View {
     }
 }
 extension EventCard {
+    /// An overlay view displaying event name and countdown on top of the image.
     struct TextOverlay: View {
         var viewModel: ViewModel
         

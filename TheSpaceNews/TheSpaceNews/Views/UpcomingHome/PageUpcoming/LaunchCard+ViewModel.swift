@@ -16,8 +16,11 @@ extension LaunchCard {
         let statusAbbrev: String
         var netCounter: String = ""
         let imageUrl: URL?
+        /// Timer publisher for updating the countdown.
         private var timer: AnyCancellable?
 
+        /// Initializes the ViewModel with launch details and sets up the countdown timer.
+        /// - Parameter details: The details of the launch.
         init(details: LaunchDetails) {
             self.details = details
             self.name = details.name
@@ -26,6 +29,7 @@ extension LaunchCard {
             setUpTimer()
         }
 
+        /// Sets up a timer that updates the countdown every second until the launch time.
         private func setUpTimer() {
             guard let netDate = Date.fromFormattedISO8601(details.net) else { return }
             timer?.cancel()
@@ -45,7 +49,7 @@ extension LaunchCard {
                     }
                 }
         }
-
+        /// Cancels the timer when the ViewModel is deallocated.
         deinit {
             timer?.cancel()
         }

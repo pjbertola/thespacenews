@@ -17,14 +17,22 @@ extension UpcomingHomeView {
         var launches: [LaunchDetails] = []
         var events: [EventDetails] = []
         var isLoading: Bool = true
-
+        
+        /// Initializes the ViewModel with a repository.
+        /// - Parameter repository: The repository to fetch data from. Defaults to SpaceNewsRepositoryDefault.
         init(repository: UpcomingRepository = SpaceNewsRepositoryDefault()) {
             self.repository = repository
         }
+
+        /// Refreshes the data by clearing the cache and reloading launches and events.
+        /// - Parameter viewError: Binding to an error object for error handling.
         func onRefresh(viewError: Binding<Error?>) async {
             repository.clearCache()
             await onAppear(viewError: viewError)
         }
+
+        /// Loads launches and events asynchronously, updating the loading state and handling errors.
+        /// - Parameter viewError: Binding to an error object for error handling.
         func onAppear(viewError: Binding<Error?>) async {
             do {
                 isLoading = true
@@ -39,6 +47,8 @@ extension UpcomingHomeView {
             }
         }
 
+        /// Returns the destination view for navigation based on the provided data.
+        /// - Parameter data: Navigation data to determine the destination.
         func getDestination(data: NavigationData) -> some View {
             coordinator.getDestination(data: data)
         }

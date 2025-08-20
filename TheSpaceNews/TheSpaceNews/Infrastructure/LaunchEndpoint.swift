@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// The endpoint fetches events after the current date, limited to 3 results, ordered by date.
 struct LaunchEndpoint {
     private var path: String {
         let now = Date().formatedISO8601()
