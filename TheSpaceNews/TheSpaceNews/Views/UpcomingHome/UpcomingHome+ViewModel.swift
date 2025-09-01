@@ -34,12 +34,11 @@ extension UpcomingHomeView {
         /// Loads launches and events asynchronously, updating the loading state and handling errors.
         /// - Parameter viewError: Binding to an error object for error handling.
         func onAppear(viewError: Binding<Error?>) async {
+            isLoading = true
             do {
-                isLoading = true
-                async let launchDetails = try await repository.fetchLaunches()
-                async let eventDetails = try await repository.fetchEvents()
-                launches = try await launchDetails
-                events = try await eventDetails
+                async let launchDetails = repository.fetchLaunches()
+                async let eventDetails = repository.fetchEvents()
+                (launches, events)  = (try await launchDetails, try await eventDetails)
                 isLoading = false
             } catch {
                 isLoading = false

@@ -11,10 +11,10 @@ import SwiftUI
 struct UpcomingHomeView: View {
     /// The view model managing launches, events, and loading state.
     var viewModel: ViewModel
-    
     /// Holds any error that occurs during data loading.
     @State private var error: Error?
-
+    /// A task for loading data, which can be cancelled when the view disappears.
+    @State private var task: Task<(), Never>? = nil
     /// Initializes the view with a repository, defaulting to SpaceNewsRepositoryDefault.
     /// - Parameter repository: The repository to fetch data from.
     init(repository: UpcomingRepository = SpaceNewsRepositoryDefault()) {
@@ -70,17 +70,21 @@ struct UpcomingHomeView: View {
                 }
                 .refreshable {
                     // Pull-to-refresh functionality.
-                    Task {
+                    task = Task {
                         await viewModel.onRefresh(viewError: $error)
                     }
                 }
                 // Error alert handling.
                 .errorAlert(error: $error) {
-                    Task {
+                    task = Task {
                         await viewModel.onAppear(viewError: $error)
                     }
                 }
             }
+        }
+        // Cancels the data loading task when the view disappears.
+        .onDisappear {
+            task?.cancel()
         }
         // Load data when the view appears.
         .task {

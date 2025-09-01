@@ -17,6 +17,8 @@ struct NewsListView: View {
     @State private var callText: String = ""
     /// Holds any error encountered during data loading.
     @State private var error: Error?
+    /// A task for loading data, which can be cancelled when the view disappears.
+    @State private var task: Task<(), Never>? = nil
 
     /// Initializes the view with a news repository.
     /// - Parameter repository: The repository to fetch news from.
@@ -33,6 +35,7 @@ struct NewsListView: View {
                     TextField("Search", text: $searchText)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                     Button (action: {
+                        page = 0
                         callText = searchText
                     }){
                         Image(systemName: "magnifyingglass.circle")
@@ -69,22 +72,23 @@ struct NewsListView: View {
                 // Pull-to-refresh support.
                 .refreshable {
                     page = 0
-                    Task {
+                    task = Task {
                         await viewModel.refreshData(viewError: $error)
                     }
                 }
                 .navigationTitle("News Articles")
                 // Error alert handling.
                 .errorAlert(error: $error) {
-                    Task {
+                    page = 0
+                    task = Task {
                         await viewModel.refreshData(viewError: $error)
                     }
                 }
             }
         }
-        // Initial data load.
-        .task {
-            await viewModel.refreshData(viewError: $error)
+        // Cancels the data loading task when the view disappears.
+        .onDisappear {
+            task?.cancel()
         }
         // Load more items when the page changes.
         .task(id: page) {
@@ -93,7 +97,7 @@ struct NewsListView: View {
             }
             await viewModel.loadMoreItems(viewError: $error)
         }
-        // Perform search when the search text changes.
+        // Initial data load and perform search when the search text changes.
         .task(id: callText) {
             await viewModel.searchNews(text: callText, viewError: $error)
         }
